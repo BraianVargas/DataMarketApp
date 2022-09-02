@@ -22,9 +22,7 @@ def commitDataList(dataList):
 
         # write the header
         writer.writerow(header)
-
-        print("dataList")
-        print(dataList)
+        
         # write the data
         for i in range(len(dataList)):
             writer.writerow(dataList[i].toList())
