@@ -1,9 +1,13 @@
-from flask import Flask, request
-import json
-
-from .Controllers.Modules import *
+from flask import (
+    Flask, request, g
+    )
 
 app = Flask(__name__)
+app.config.from_pyfile("DataFiles/config.py")
+
+from .Controllers.Modules import *
+from .Commons.schema import *
+from .Commons.db import getDB
 
 offersList = []
 offersList = readFile('DataFiles/offers_data.csv')
@@ -14,9 +18,36 @@ dictionaryList = []
 # ---------------------- GET routes ----------------------
 @app.route("/getOffers")
 def getAll():
-    for i in range(len(offersList)):
-        dictionaryList.append(offersList[i].toJSON())
-    return dictionaryList
+    db, c = getDB()
+    c.execute(
+        """ 
+        SELECT
+            offerId,
+            created_at,
+            companyName,
+            offerTitle,
+            industry,
+            type,
+            verification,
+            reviews,
+            appliedUsers,
+            offersAvailables,
+            offersLefts,
+            companyDescription,
+            description,
+            instructions,
+            location,
+            rewards,
+            picture
+        FROM offers ORDER BY offerId DESC
+        """
+    )
+    todos = c.fetchall()
+    print(todos)
+    return todos
+    # for i in range(len(offersList)):
+    #     dictionaryList.append(offersList[i].toJSON())
+    # return dictionaryList
 
 @app.route('/filter/offerId/<offerId>')
 def getOfferById(offerId):

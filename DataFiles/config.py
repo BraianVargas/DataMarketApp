@@ -1,0 +1,6 @@
+DATABASE_HOST = 'localhost'
+DATABASE_USER = 'root'
+DATABASE_PASSWORD = ''
+DATABASE = 'datamarket'
+SECRET_KEY = "GDtfDCFYjDhhGGHVsDAgSewKisaksd"
+TRACK_MODIFICATIONS = False
