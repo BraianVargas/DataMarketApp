@@ -19,45 +19,29 @@ dictionaryList = []
 @app.route("/getOffers")
 def getAll():
     db, c = getDB()
-    c.execute(
-        """ 
-        SELECT
-            offerId,
-            created_at,
-            companyName,
-            offerTitle,
-            industry,
-            type,
-            verification,
-            reviews,
-            appliedUsers,
-            offersAvailables,
-            offersLefts,
-            companyDescription,
-            description,
-            instructions,
-            location,
-            rewards,
-            picture
-        FROM offers ORDER BY offerId DESC
-        """
-    )
-    todos = c.fetchall()
-    print(todos)
-    return todos
-    # for i in range(len(offersList)):
-    #     dictionaryList.append(offersList[i].toJSON())
-    # return dictionaryList
+    c.execute("SELECT * FROM offers ORDER BY offerId ASC ")
+    offers = c.fetchall()
+    if offers!=None:
+        return offers
+    else:
+        return "404 - Offer Not Found"
+    
 
 @app.route('/filter/offerId/<offerId>')
 def getOfferById(offerId):
     i = getOfferByIds(offerId)
     return i
 
-@app.route('/filter/company/<companyName>')
-def getOfferByCompanyName(companyName):
-    i = getCompany(companyName)
-    return i
+@app.route('/filter/company/<companyName> <industry> <type> <verification> <location> <rewards>', methods=['GET','POST'])
+def getOfferByCompanyName(**kwargs):
+    filters = None
+    if request.method=='POST':
+        filters = request.get_json()
+        i = getFiltered(filters, **kwargs)
+        return i
+    else:
+        i = getFiltered(**kwargs)
+        return i
 
 @app.route('/filter/industry/<industry>', methods=['GET'])
 def getOfferByIndustry(industry):

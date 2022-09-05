@@ -1,6 +1,6 @@
 import csv
-import json
 from ..Classes.offers_class import Offers
+from ..Commons.db import getDB
 
 offersList = []
 
@@ -31,14 +31,43 @@ def commitDataList(dataList):
 
 def getOfferByIds(id):
     i = 0 
-    while ((i < len(offersList)) and ((int(id) != int(offersList[i].toJSON()['offerId'])))):
-        i+=1
-    if i<len(offersList):
-        return(offersList[i].toJSON())
+    c = getDB()
+    
+    c.execute('SELECT * FROM offers WHERE offerId = %s', (id,))
+    offer = c.fetchone()
+    if offer!=None:
+        return offer
     else:
         return "404 - Offer Not Found"
 
-        
+def getFiltered(filters, **kwargs):
+    db, c = getDB()
+    query = "SELECT * FROM offers"
+    i = 0
+    if filters != None:
+        for key, value in filters.items():
+            if i == 0:
+                query += " WHERE "
+            else:
+                query += " || "
+            query += "{} LIKE {}".format(key, value)
+            i+=1
+    else:
+        for key, value in kwargs.items():
+            if i == 0:
+                query += " WHERE "
+            else:
+                query += " || "
+            query += "{} LIKE {}".format(key, value)
+            i+=1
+    return query
+    
+    # result = c.execute(query)
+    # if result != None:
+    #     return result
+    # else:
+    #     return "404 - Offer Not Found"
+
 def getCompany(companyName):
     i = 0 
     listOfOffers = []
