@@ -66,51 +66,5 @@ CREATE TABLE `user` (
   `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Índices para tablas volcadas
---
 
---
--- Indices de la tabla `offers`
---
-ALTER TABLE `offers`
-  ADD PRIMARY KEY (`offerId`);
 
---
--- Indices de la tabla `paymentinformation`
---
-ALTER TABLE `paymentinformation`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `user`
---
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`userId`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `offers`
---
-ALTER TABLE `offers`
-  MODIFY `offerId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=146;
-
---
--- AUTO_INCREMENT de la tabla `paymentinformation`
---
-ALTER TABLE `paymentinformation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `user`
---
-ALTER TABLE `user`
-  MODIFY `userId` int(11) NOT NULL AUTO_INCREMENT;
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
