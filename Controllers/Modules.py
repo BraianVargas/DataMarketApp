@@ -55,8 +55,7 @@ def getOffer(filters, **kwargs):
                 query += " WHERE "
             else:
                 query += " || "
-            
-            query += "`{}`  '{}%'".format(key, value)
+            query += "`{}` LIKE '{}%'".format(key, value)
             query += " || "
             query += "`{}` LIKE '%{}'".format(key, value)
             query += " || "

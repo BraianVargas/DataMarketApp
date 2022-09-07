@@ -38,7 +38,6 @@ def getFiltered():
         i = getOffer(filters)
         return i
     else:
-        filters = request.get_json()
         i = getOffer(filters)
         return i
 
