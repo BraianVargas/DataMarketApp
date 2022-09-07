@@ -64,58 +64,12 @@ def getOffer(filters, **kwargs):
             #     query += "{} LIKE {}".format(key, value)
             # else:
             i+=1
-        
-    # return query
-    print(query)
 
     c.execute(query)
     result = c.fetchall()
 
     if result != None:
         return result
-    else:
-        return "404 - Offer Not Found"
-        
-
-def getCompany(companyName):
-    i = 0 
-    listOfOffers = []
-    while (i < len(offersList)):
-        if ((companyName.lower() == offersList[i].toJSON()['companyName'].lower())):
-            listOfOffers.append(offersList[i].toJSON())
-            i+=1
-        else:
-            i+=1
-    if listOfOffers != None:
-        return listOfOffers
-    else:
-        return "404 - Offer Not Found"
-        
-def getType(type):
-    i = 0 
-    listOfOffers = []
-    while (i < len(offersList)):
-        if ((type.lower() == offersList[i].toJSON()['type'].lower())):
-            listOfOffers.append(offersList[i].toJSON())
-            i+=1
-        else:
-            i+=1
-    if listOfOffers != None:
-        return listOfOffers
-    else:
-        return "404 - Offer Not Found"
-
-def getIndustry(industry):
-    i = 0 
-    listOfOffers = []
-    while (i < len(offersList)):
-        if(((industry.lower() == offersList[i].toJSON()['industry'].lower()))):
-            listOfOffers.append(offersList[i].toJSON())
-            i+=1
-        else:
-            i+=1
-    if listOfOffers != None:
-        return listOfOffers
     else:
         return "404 - Offer Not Found"
 

@@ -24,7 +24,6 @@ def getAll():
     else:
         return "404 - Offer Not Found"
     
-
 @app.route('/filter/offerId/<offerId>')
 def getOfferById(offerId):
     i = getOfferByIds(offerId)
@@ -32,17 +31,18 @@ def getOfferById(offerId):
 
 @app.route('/filter/', methods=['GET','POST'])
 def getFiltered():
-    filters = []
+    filters = None
     if request.method=='POST':
         filters = request.get_json()
         i = getOffer(filters)
         return i
     else:
+        filters = request.get_json()
         i = getOffer(filters)
         return i
 
 # ---------------------- POST routes ----------------------
-@app.route('/create/offer', methods=['POST'])
+@app.route('/createOffer', methods=['POST'])
 def createOffer():
     data = (request.get_json())
     statMessage = createNewOffer(offersList, data)
