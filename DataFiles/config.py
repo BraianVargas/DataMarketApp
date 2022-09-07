@@ -1,3 +1,4 @@
+FLASK_APP = "__init__"
 DATABASE_HOST = 'localhost'
 DATABASE_USER = 'root'
 DATABASE_PASSWORD = ''
