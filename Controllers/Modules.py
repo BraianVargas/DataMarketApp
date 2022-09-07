@@ -31,65 +31,13 @@ def getOfferByIds(id):
     else:
         return "404 - Offer Not Found"
 
-def getFiltered(filters):
-    db, c = getDB()
-    query = "SELECT * FROM offers"
-    i = 0
-    if filters != None:
-        for key, value in filters.items():
-            if i == 0:
-                query += " WHERE "
-            else:
-                query += " || "
-            query += "{} LIKE '{}'".format(key, value)
-            # if isinstance(value, int):
-            #     query += "{} LIKE {}".format(key, value)
-            # else:
-            i+=1
-    
-    # return query
-    
-    print(query)
-    c.execute(query)
-    result = c.fetchall()
-
-    if result != None:
-        return result
-    else:
-        return "404 - Offer Not Found"
-
-# def getFiltered(**kwargs):
-#     db, c = getDB()
-#     query = "SELECT * FROM offers"
-#     i = 0
-#     if kwargs != None:
-#         for key, value in kwargs.items():
-#             if i == 0:
-#                 query += " WHERE "
-#             else:
-#                 query += " || "
-#             if isinstance(value, int):
-#                 query += "{} LIKE {}".format(key, value)
-#             else:
-#                 query += "{} LIKE '{}'".format(key, value)
-#             i+=1
-    
-#     # return query
-    
-#     print(query)
-#     result = c.execute(query)
-#     if result != None:
-#         return result
-#     else:
-#         return "404 - Offer Not Found"
-
-
 def getOffer(filters, **kwargs):
     db, c = getDB()
     query = "SELECT * FROM offers"
     i = 0
 
-    if kwargs != None:
+    if kwargs != {}:
+        print(kwargs)
         for key, value in kwargs.items():
             if i == 0:
                 query += " WHERE "
@@ -117,7 +65,7 @@ def getOffer(filters, **kwargs):
             #     query += "{} LIKE {}".format(key, value)
             # else:
             i+=1
-    
+        
     # return query
     print(query)
 

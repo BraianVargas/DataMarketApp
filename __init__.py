@@ -30,36 +30,17 @@ def getOfferById(offerId):
     i = getOfferByIds(offerId)
     return i
 
-@app.route('/filter/company/<companyName>', methods=['GET','POST'])
-def getOfferByCompanyName(companyName):
-    filters = None
-    if request.method=='POST':
-        filters = request.get_json()
-        i = getFiltered(filters)
-        return i
-    else:
-        i = getFiltered(filters)
-        return i
-
-@app.route('/filter/industry/', methods=['GET','POST'])
-def getOfferByIndustry():
+@app.route('/filter/', methods=['GET','POST'])
+def getFiltered():
     filters = []
     if request.method=='POST':
         filters = request.get_json()
         i = getOffer(filters)
         return i
     else:
+        filters = request.get_json()
         i = getOffer(filters)
         return i
-        
-    
-
-@app.route('/filter/type/<type>', methods=['GET'])
-def getOfferByType(type):
-    i = getType(type)
-    return i
-
-
 
 # ---------------------- POST routes ----------------------
 @app.route('/create/offer', methods=['POST'])

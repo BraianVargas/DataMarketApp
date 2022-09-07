@@ -10,4 +10,4 @@ source venv/bin/activate
 pip install flask
 
 # Para ejecutar el programa (en linux)
-flask --app __init__ --debug run
+flask --app __ init __ --debug run
