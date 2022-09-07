@@ -4,15 +4,6 @@ from ..Commons.db import getDB
 
 offersList = []
 
-def readFile(filename):
-    with open(filename) as csv_file:
-        csv_reader = csv.reader(csv_file, delimiter=',')
-        next(csv_reader)
-        for row in csv_reader:
-            offer = Offers(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13], row[14], row[15])
-            offersList.append(offer)
-    return offersList
-
 def commitDataList(dataList):
     # funcion para guardar archivo csv
     header = ["Offer_id" ,"Company Name" ,"Offer title" ,"Industry" ,"Type" ,"Verification" ,"reviews" ,"Applied Users" ,"Number of offers availables" ,"Number of offer left" ,"Company description" ,"Description" ,"Instructions" ,"Location" ,"Rewards" ,"picture"]
@@ -40,12 +31,39 @@ def getOfferByIds(id):
     else:
         return "404 - Offer Not Found"
 
-# def getFiltered(filters):
+def getFiltered(filters):
+    db, c = getDB()
+    query = "SELECT * FROM offers"
+    i = 0
+    if filters != None:
+        for key, value in filters.items():
+            if i == 0:
+                query += " WHERE "
+            else:
+                query += " || "
+            query += "{} LIKE '{}'".format(key, value)
+            # if isinstance(value, int):
+            #     query += "{} LIKE {}".format(key, value)
+            # else:
+            i+=1
+    
+    # return query
+    
+    print(query)
+    c.execute(query)
+    result = c.fetchall()
+
+    if result != None:
+        return result
+    else:
+        return "404 - Offer Not Found"
+
+# def getFiltered(**kwargs):
 #     db, c = getDB()
 #     query = "SELECT * FROM offers"
 #     i = 0
-#     if filters != None:
-#         for key, value in filters.items():
+#     if kwargs != None:
+#         for key, value in kwargs.items():
 #             if i == 0:
 #                 query += " WHERE "
 #             else:
@@ -65,33 +83,8 @@ def getOfferByIds(id):
 #     else:
 #         return "404 - Offer Not Found"
 
-def getFiltered(**kwargs):
-    db, c = getDB()
-    query = "SELECT * FROM offers"
-    i = 0
-    if kwargs != None:
-        for key, value in kwargs.items():
-            if i == 0:
-                query += " WHERE "
-            else:
-                query += " || "
-            if isinstance(value, int):
-                query += "{} LIKE {}".format(key, value)
-            else:
-                query += "{} LIKE '{}'".format(key, value)
-            i+=1
-    
-    # return query
-    
-    print(query)
-    result = c.execute(query)
-    if result != None:
-        return result
-    else:
-        return "404 - Offer Not Found"
 
-
-def getOffer(**kwargs):
+def getOffer(filters, **kwargs):
     db, c = getDB()
     query = "SELECT * FROM offers"
     i = 0
@@ -102,17 +95,35 @@ def getOffer(**kwargs):
                 query += " WHERE "
             else:
                 query += " || "
-            query += "`{}` LIKE '{}%'".format(key, value)
+            query += "`{}`  '{}%'".format(key, value)
             query += " || "
             query += "`{}` LIKE '%{}'".format(key, value)
             query += " || "
             query += "`{}` LIKE '%{}%'".format(key, value)
             i+=1
+    else:
+        for key, value in filters.items():
+            if i == 0:
+                query += " WHERE "
+            else:
+                query += " || "
+            
+            query += "`{}`  '{}%'".format(key, value)
+            query += " || "
+            query += "`{}` LIKE '%{}'".format(key, value)
+            query += " || "
+            query += "`{}` LIKE '%{}%'".format(key, value)
+            # if isinstance(value, int):
+            #     query += "{} LIKE {}".format(key, value)
+            # else:
+            i+=1
     
     # return query
     print(query)
 
-    result = c.execute(query)
+    c.execute(query)
+    result = c.fetchall()
+
     if result != None:
         return result
     else:

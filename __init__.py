@@ -10,10 +10,8 @@ from .Commons.schema import *
 from .Commons.db import getDB
 
 offersList = []
-offersList = readFile('DataFiles/offers_data.csv')
 
 dictionaryList = []
-
 
 # ---------------------- GET routes ----------------------
 @app.route("/getOffers")
@@ -32,21 +30,28 @@ def getOfferById(offerId):
     i = getOfferByIds(offerId)
     return i
 
-@app.route('/filter/company/', methods=['GET','POST'])
-def getOfferByCompanyName(**kwarg):
+@app.route('/filter/company/<companyName>', methods=['GET','POST'])
+def getOfferByCompanyName(companyName):
     filters = None
     if request.method=='POST':
         filters = request.get_json()
         i = getFiltered(filters)
         return i
     else:
-        i = getFiltered(**kwarg)
+        i = getFiltered(filters)
         return i
 
-@app.route('/filter/industry/<industry>')
-def getOfferByIndustry(**kwargs):
-    i = getOffer(**kwargs)
-    return i
+@app.route('/filter/industry/', methods=['GET','POST'])
+def getOfferByIndustry():
+    filters = []
+    if request.method=='POST':
+        filters = request.get_json()
+        i = getOffer(filters)
+        return i
+    else:
+        i = getOffer(filters)
+        return i
+        
     
 
 @app.route('/filter/type/<type>', methods=['GET'])

@@ -26,7 +26,6 @@ def init_db():
     db.commit()
 
 @click.command('init-db')
-
 def init_db_command():
     init_db()
     click.echo('Initialized the database.')
