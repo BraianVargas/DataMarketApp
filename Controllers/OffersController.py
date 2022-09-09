@@ -32,7 +32,7 @@ def getOfferByIds(id):
     else:
         return "404 - Offer Not Found"
 
-git commit -m "[DEL] iasdfja}´sf"
+
 def getOffer(filters, **kwargs):
     db, c = getDB()
     query = "SELECT * FROM offers"
@@ -78,7 +78,7 @@ def getOffer(filters, **kwargs):
 def getOffers(Title):
     db, c = getDB()
     #Se buscan todas las coincidenciasde offerTitle
-    query = f"SELECT offerTitle FROM offers WHERE offerTitle LIKE '%{Title}%' "
+    query = f"SELECT * FROM offers WHERE offerTitle LIKE '%{Title}%' "
     c.execute(query)
     result = c.fetchall()
     

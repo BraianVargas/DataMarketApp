@@ -5,7 +5,7 @@ from flask import (
 app = Flask(__name__)
 app.config.from_pyfile("DataFiles/config.py")
 
-from .Controllers.Modules import *
+from .Controllers.OffersController import *
 from .Commons.schema import *
 from .Commons.db import getDB
 
