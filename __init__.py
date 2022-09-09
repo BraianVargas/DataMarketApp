@@ -41,6 +41,8 @@ def getFiltered():
 def getOf():
     #Se recibe el argumento como KEY
     OfferTitle = request.args.get('offer') 
+    OfferTitle=OfferTitle.split()
+    print(OfferTitle)
     i = getOffers(OfferTitle)
     return i
 

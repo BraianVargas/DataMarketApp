@@ -77,13 +77,18 @@ def getOffer(filters, **kwargs):
 
 def getOffers(Title):
     db, c = getDB()
+    filtered=[]
     #Se buscan todas las coincidenciasde offerTitle
-    query = f"SELECT * FROM offers WHERE offerTitle LIKE '%{Title}%' "
-    c.execute(query)
-    result = c.fetchall()
+    for title  in Title:
+        print(title)
+        query = f"SELECT * FROM offers WHERE offerTitle LIKE '%{title}%'"
+        c.execute(query)
+        result = c.fetchall()
+        if result != None:
+            filtered.append(result)
     
-    if result != None:
-        return result
+    if filtered != None:
+        return filtered
     else:
         return "404 - Offer Not Found"
 
