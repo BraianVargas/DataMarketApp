@@ -1,54 +1,51 @@
-from flask import Flask, request
-import json
-
-<<<<<<< HEAD
-from .Controllers.Modules import *
+from flask import (
+    Flask, request, g
+    )
 
 app = Flask(__name__)
-=======
-from .Controllers.OffersController import *
+app.config.from_pyfile("DataFiles/config.py")
+
+from .Controllers.Modules import *
 from .Commons.schema import *
 from .Commons.db import getDB
->>>>>>> d1fbbde (Cambio de nombre de controllers a OffersControllers)
 
 offersList = []
-offersList = readFile('DataFiles/offers_data.csv')
 
 dictionaryList = []
-
 
 # ---------------------- GET routes ----------------------
 @app.route("/getOffers")
 def getAll():
-    for i in range(len(offersList)):
-        dictionaryList.append(offersList[i].toJSON())
-    return dictionaryList
-
+    db, c = getDB()
+    c.execute("SELECT * FROM offers ORDER BY offerId ASC ")
+    offers = c.fetchall()
+    if offers!=None:
+        return offers
+    else:
+        return "404 - Offer Not Found"
+    
 @app.route('/filter/offerId/<offerId>')
 def getOfferById(offerId):
     i = getOfferByIds(offerId)
     return i
 
-@app.route('/filter/company/<companyName>')
-def getOfferByCompanyName(companyName):
-    i = getCompany(companyName)
-    return i
-
-@app.route('/filter/industry/<industry>', methods=['GET'])
-def getOfferByIndustry(industry):
-    i = getIndustry(industry)
-    return i
-    
-
-@app.route('/filter/type/<type>', methods=['GET'])
-def getOfferByType(type):
-    i = getType(type)
+@app.route('/filter/', methods=['GET','POST'])
+def getFiltered():
+    filters = None
+    filters = request.get_json()
+    i = getOffer(filters)
     return i
 
 
+@app.route('/search/', methods=['GET','POST'])
+def getOf():
+    #Se recibe el argumento como KEY
+    OfferTitle = request.args.get('offer') 
+    i = getOffers(OfferTitle)
+    return i
 
 # ---------------------- POST routes ----------------------
-@app.route('/create/offer', methods=['POST'])
+@app.route('/createOffer', methods=['POST'])
 def createOffer():
     data = (request.get_json())
     statMessage = createNewOffer(offersList, data)
