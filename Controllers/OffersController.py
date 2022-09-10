@@ -62,7 +62,7 @@ def create_new_offer(offerDict):
         db.commit()
     except Exception as e:
         print(e)
-        return "NO SE PUDO CREAR LA OFERTA"
+        return F"FATAL ERROR. {e}"
     return "202 - Status Ok - Offer Created"
     
     
