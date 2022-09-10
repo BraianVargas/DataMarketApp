@@ -53,6 +53,12 @@ def createOffer():
     statMessage = createNewOffer(offersList, data)
     return statMessage
 
+@app.route('/crearOferta', methods=['POST'])
+def crear():
+    data = (request.get_json())
+    statMessage = crearNuevaOferta(data)
+    return statMessage
+
 
 # if __name__=='__main__':
 #     app.run(debug=True)

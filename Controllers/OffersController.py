@@ -85,7 +85,6 @@ def getOffers(Title):
             query += f" offerTitle LIKE '%{title}%' "
         else:
             query += f" || offerTitle LIKE '%{title}%' "
-
     c.execute(query)
     filtered = c.fetchall()
     if filtered != None:
@@ -98,3 +97,20 @@ def createNewOffer(offersList, offerDict):
     offersList.append(newOffer)
     commitDataList(offersList)
     return "202 - Status Ok - Offer Created"
+
+def crearNuevaOferta(offerDict):
+    newOffer = [offerDict['offerId'], offerDict['companyName'], offerDict['offerTitle'], offerDict['industry'], offerDict['type'], offerDict['verification'], offerDict['reviews'], offerDict['appliedUsers'], offerDict['offersAvailables'], offerDict['offersLefts'], offerDict['companyDescription'], offerDict['description'], offerDict['instructions'], offerDict['location'], offerDict['rewards'], offerDict['picture']]
+    DataList(newOffer)
+    return "202 - Status Ok - Offer Created"
+
+def DataList(data):
+    db, c = getDB()
+    #"INSERT INTO offers(offerId,created_at, companyName, offerTitle, industry, type, verification, reviews, appliedUsers, offersAvailables, offersLefts, companyDescription, description, instructions, location, rewards, picture) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", data
+    #query = "INSERT INTO offers (offerId, created_at, companyName, offerTitle, industry, type, verification, reviews, appliedUsers, offersAvailables, offersLefts, companyDescription, description, instructions, location, rewards, picture) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", data
+    try:
+        c.execute("INSERT INTO offers (offerId, created_at, companyName, offerTitle, industry, type, verification, reviews, appliedUsers, offersAvailables, offersLefts, companyDescription, description, instructions, location, rewards, picture) VALUES(%s,'0000-00-00 00:00:00',%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)", data)
+        print("se pudo")
+    except Exception as e:
+        print(e)
+    
+    return
