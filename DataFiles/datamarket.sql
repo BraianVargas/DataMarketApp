@@ -1,5 +1,5 @@
 CREATE TABLE `offers` (
-  `offerId` int(11) NOT NULL AUTO_INCREMENT,
+  `offerId` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `companyName` varchar(50) DEFAULT NULL,
   `offerTitle` varchar(50) DEFAULT NULL,
