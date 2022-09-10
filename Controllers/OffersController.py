@@ -4,34 +4,16 @@ from ..Commons.db import getDB
 
 offersList = []
 
-def commitDataList(dataList):
-    # funcion para guardar archivo csv
-    header = ["Offer_id" ,"Company Name" ,"Offer title" ,"Industry" ,"Type" ,"Verification" ,"reviews" ,"Applied Users" ,"Number of offers availables" ,"Number of offer left" ,"Company description" ,"Description" ,"Instructions" ,"Location" ,"Rewards" ,"picture"]
-    
-    with open('DataFiles/offers_data.csv', 'w', encoding='UTF8') as f:
-        writer = csv.writer(f)
-
-        # write the header
-        writer.writerow(header)
-        
-        # write the data
-        for i in range(len(dataList)):
-            writer.writerow(dataList[i].toList())
-    
-    return
-
-
 def getOfferByIds(id):
     i = 0 
     c = getDB()
     
-    c.execute('SELECT * FROM offers WHERE offerId = %s', (id,))
+    c.execute(f'SELECT * FROM offers WHERE offerId = {id}')
     offer = c.fetchone()
     if offer!=None:
         return offer
     else:
         return "404 - Offer Not Found"
-
 
 def getOffer(filters, **kwargs):
     db, c = getDB()
@@ -91,16 +73,40 @@ def getOffers(Title):
         return filtered
     else:
         return "404 - Offer Not Found"
-    
-def createNewOffer(offersList, offerDict):
-    newOffer = Offers( offerDict['offerId'], offerDict['companyName'], offerDict['offerTitle'], offerDict['industry'], offerDict['type'], offerDict['verification'], offerDict['reviews'], offerDict['appliedUsers'], offerDict['offersAvailables'], offerDict['offersLefts'], offerDict['companyDescription'], offerDict['description'], offerDict['instructions'], offerDict['location'], offerDict['rewards'], offerDict['picture'] )
-    offersList.append(newOffer)
-    commitDataList(offersList)
-    return "202 - Status Ok - Offer Created"
 
-def crearNuevaOferta(offerDict):
-    newOffer = [offerDict['offerId'], offerDict['companyName'], offerDict['offerTitle'], offerDict['industry'], offerDict['type'], offerDict['verification'], offerDict['reviews'], offerDict['appliedUsers'], offerDict['offersAvailables'], offerDict['offersLefts'], offerDict['companyDescription'], offerDict['description'], offerDict['instructions'], offerDict['location'], offerDict['rewards'], offerDict['picture']]
-    DataList(newOffer)
+def createNewOffer(offerDict):
+    db,c=getDB()
+    # INSERT INTO offers (keys) VALUES (values)
+    q = "INSERT INTO offers "
+    keys =[] 
+    values = []
+
+    for key,value in offerDict.items():
+        keys.append(key)
+        values.append(value)
+    i = 0
+    q += "("
+    for key in keys:
+        if key == keys[len(keys) -1]:
+            q += f"`{key}`"
+        else:
+            q += f"`{key}`, "
+    q += ")"
+
+    q += " VALUES "
+    
+    q += "("
+    i=0
+    for value in values:
+        if value == values[len(values) -1]:
+            q += f"`{value}`"
+        else:
+            q += f"`{value}`, "
+    q += ")"
+
+    print(q)
+    c.execute(q)
+
     return "202 - Status Ok - Offer Created"
 
 def DataList(data):

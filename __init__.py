@@ -47,16 +47,10 @@ def getOf():
     return i
 
 # ---------------------- POST routes ----------------------
-@app.route('/createOffer', methods=['POST'])
-def createOffer():
-    data = (request.get_json())
-    statMessage = createNewOffer(offersList, data)
-    return statMessage
-
 @app.route('/crearOferta', methods=['POST'])
 def crear():
     data = (request.get_json())
-    statMessage = crearNuevaOferta(data)
+    statMessage = createNewOffer(data)
     return statMessage
 
 
