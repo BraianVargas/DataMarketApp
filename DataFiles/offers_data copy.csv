@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
 Offer_id,Company Name,Offer title,Industry,Type,Verification,reviews,Applied Users,Number of offers availables,Number of offer left,Company description,Description,Instructions,Location,Rewards,picture
 0001,Captus Ltd,Kombucha tropical flavors,beverages/softdrink manufacturing,Product testing & Survey,No,4.5,800,80,20,Authentic kombucha fermented with no shortcuts,"We are looking for great people with passion about eating healthy and wellbing. We are developing a range of new tropical flavors for our kombucha, becuase Healthy could be testy as well. So, do yourselft and your gut a favor  + boost your immute system and help us to develop and explore these amazing flavors",when you click in Apply and  accept this offer you will receive our product sample within 5 days. After click in start testing experience and fill out the survey based on your experience,Sydney-Australia,$,
 0002,Avion Co,Investment & Finance survey,financial sector,Data & Survey,Yes,4,1500,350,120,"We are the finance revolution, we try to innovate and break normal standards. Our goal is offer something new, something different, something for our clients",Come on board and help us to understand better the retail investment market and design products and platform according to the necessity of users like you,Click on Apply and start with the survey,Sydney-Australia,$,
@@ -8,4 +11,20 @@ Offer_id,Company Name,Offer title,Industry,Type,Verification,reviews,Applied Use
 0007,House,,,,,,,,,,,,,,
 0008,,,,,,,,,,,,,,,
 0009,,,,,,,,,,,,,,,
+=======
+>>>>>>> origin
+Offer_id,Company Name,Offer title,Industry,Type,Verification,reviews,Applied Users,Number of offers availables,Number of offer left,Company description,Description,Instructions,Location,Rewards,picture
+0001,Captus Ltd,Kombucha tropical flavors,beverages/softdrink manufacturing,Product testing & Survey,No,4.5,800,80,20,Authentic kombucha fermented with no shortcuts,"We are looking for great people with passion about eating healthy and wellbing. We are developing a range of new tropical flavors for our kombucha, becuase Healthy could be testy as well. So, do yourselft and your gut a favor  + boost your immute system and help us to develop and explore these amazing flavors",when you click in Apply and  accept this offer you will receive our product sample within 5 days. After click in start testing experience and fill out the survey based on your experience,Sydney-Australia,$,
+0002,Avion Co,Investment & Finance survey,financial sector,Data & Survey,Yes,4,1500,350,120,"We are the finance revolution, we try to innovate and break normal standards. Our goal is offer something new, something different, something for our clients",Come on board and help us to understand better the retail investment market and design products and platform according to the necessity of users like you,Click on Apply and start with the survey,Sydney-Australia,$,
+0003,Seguro Co,Health insurance & premium analysis,Insurance,Healh tracker data & Survey,,,,200,100,Award-Winning Australian Insurance ,Our mission is provide a fair quota and adjust your ensurance cover based upon data. This quick survey consist of questions that are created with expert consultation from the insurance industry and are ready to bring you the best quota based on real data.,Click on Apply and start with the survey,Sydney-Australia,$,
+0004,Tetris Ltd,Play and earn,Gaming,,Yes,3.5,1500,,,,,,,Gaming Points,
+0005,Lab,Laboratory Trials,healthcare and health technology,Product testing & Survey,,,,,,,,,,,
+0006,Mipiace Ltd,Travel Experience,Tourism and Travel,Data & Survey,Yes,4,2500,300,,We are an Australia company that supports Hospitality and travel industry with insight and D&A,,,,fly miles,
+0007,House,,,,,,,,,,,,,,
+0008,,,,,,,,,,,,,,,
+0009,,,,,,,,,,,,,,,
+<<<<<<< HEAD
+=======
+>>>>>>> 523a30975e8f69be901e81c9de67858675340c4c
+>>>>>>> origin
 00010,,,,,,,,,,,,,,,

@@ -14,4 +14,8 @@ pip install flask
 flask --app __ init __ --debug run
 =======
 flask --app __init__ --debug run
+<<<<<<< HEAD
 >>>>>>> fefecd345406a1454474e6b13cba329e31521d16
+=======
+>>>>>>> 523a30975e8f69be901e81c9de67858675340c4c
+>>>>>>> origin

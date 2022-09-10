@@ -2,8 +2,6 @@ import csv
 from ..Classes.offers_class import Offers
 from ..Commons.db import getDB
 
-offersList = []
-
 def getOfferByIds(id):
     i = 0 
     c = getDB()
@@ -15,49 +13,7 @@ def getOfferByIds(id):
     else:
         return "404 - Offer Not Found"
 
-def getOffer(filters, **kwargs):
-    db, c = getDB()
-    query = "SELECT * FROM offers"
-    i = 0
-
-    if kwargs != {}:
-        print(kwargs)
-        for key, value in kwargs.items():
-            if i == 0:
-                query += " WHERE "
-            else:
-                query += " || "
-            query += "`{}`  '{}%'".format(key, value)
-            query += " || "
-            query += "`{}` LIKE '%{}'".format(key, value)
-            query += " || "
-            query += "`{}` LIKE '%{}%'".format(key, value)
-            i+=1
-    else:
-        for key, value in filters.items():
-            if i == 0:
-                query += " WHERE "
-            else:
-                query += " || "
-            query += "`{}` LIKE '{}%'".format(key, value)
-            query += " || "
-            query += "`{}` LIKE '%{}'".format(key, value)
-            query += " || "
-            query += "`{}` LIKE '%{}%'".format(key, value)
-            # if isinstance(value, int):
-            #     query += "{} LIKE {}".format(key, value)
-            # else:
-            i+=1
-    print(query)
-    c.execute(query)
-    result = c.fetchall()
-
-    if result != None:
-        return result
-    else:
-        return "404 - Offer Not Found"
-
-def getOffers(Title):
+def get_offers(Title):
     db, c = getDB()
     filtered=[]
     #Se buscan todas las coincidencias de offerTitle
@@ -73,50 +29,40 @@ def getOffers(Title):
         return filtered
     else:
         return "404 - Offer Not Found"
-
-def createNewOffer(offerDict):
+    
+def create_new_offer(offerDict):
     db,c=getDB()
-    # INSERT INTO offers (keys) VALUES (values)
+    # Crea la query por medio de las KEY y las values ingresadas
     q = "INSERT INTO offers "
     keys =[] 
     values = []
-
     for key,value in offerDict.items():
         keys.append(key)
         values.append(value)
-    i = 0
     q += "("
     for key in keys:
-        if key == keys[len(keys) -1]:
-            q += f"`{key}`"
+        if key == keys[-1]:
+            q += f"{key}"
         else:
-            q += f"`{key}`, "
+            q += f"{key},"
     q += ")"
-
-    q += " VALUES "
-    
+    q += " VALUES"
     q += "("
-    i=0
     for value in values:
-        if value == values[len(values) -1]:
-            q += f"`{value}`"
+        if value == values[-1]:
+            q += f"'{value}'"
+        elif type(value) == int or type(value) == float:
+            q += f"{value},"
         else:
-            q += f"`{value}`, "
+            q += f"'{value}',"
     q += ")"
-
-    print(q)
-    c.execute(q)
-
-    return "202 - Status Ok - Offer Created"
-
-def DataList(data):
-    db, c = getDB()
-    #"INSERT INTO offers(offerId,created_at, companyName, offerTitle, industry, type, verification, reviews, appliedUsers, offersAvailables, offersLefts, companyDescription, description, instructions, location, rewards, picture) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", data
-    #query = "INSERT INTO offers (offerId, created_at, companyName, offerTitle, industry, type, verification, reviews, appliedUsers, offersAvailables, offersLefts, companyDescription, description, instructions, location, rewards, picture) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", data
+    #Carga los datos en la db
     try:
-        c.execute("INSERT INTO offers (offerId, created_at, companyName, offerTitle, industry, type, verification, reviews, appliedUsers, offersAvailables, offersLefts, companyDescription, description, instructions, location, rewards, picture) VALUES(%s,'0000-00-00 00:00:00',%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)", data)
-        print("se pudo")
+        c.execute(q)
+        db.commit()
     except Exception as e:
         print(e)
+        return F"FATAL ERROR. {e}"
+    return "202 - Status Ok - Offer Created"
     
-    return
+    
