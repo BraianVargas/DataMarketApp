@@ -66,7 +66,7 @@ def getOffer(filters, **kwargs):
             #     query += "{} LIKE {}".format(key, value)
             # else:
             i+=1
-
+    print(query)
     c.execute(query)
     result = c.fetchall()
 
@@ -78,20 +78,21 @@ def getOffer(filters, **kwargs):
 def getOffers(Title):
     db, c = getDB()
     filtered=[]
-    #Se buscan todas las coincidenciasde offerTitle
-    for title  in Title:
-        print(title)
-        query = f"SELECT * FROM offers WHERE offerTitle LIKE '%{title}%'"
-        c.execute(query)
-        result = c.fetchall()
-        if result != None:
-            filtered.append(result)
-    
+    #Se buscan todas las coincidencias de offerTitle
+    query = "SELECT * FROM offers WHERE "
+    for title in Title:
+        if title == Title[0]:
+            query += f" offerTitle LIKE '%{title}%' "
+        else:
+            query += f" || offerTitle LIKE '%{title}%' "
+
+    c.execute(query)
+    filtered = c.fetchall()
     if filtered != None:
         return filtered
     else:
         return "404 - Offer Not Found"
-
+    
 def createNewOffer(offersList, offerDict):
     newOffer = Offers( offerDict['offerId'], offerDict['companyName'], offerDict['offerTitle'], offerDict['industry'], offerDict['type'], offerDict['verification'], offerDict['reviews'], offerDict['appliedUsers'], offerDict['offersAvailables'], offerDict['offersLefts'], offerDict['companyDescription'], offerDict['description'], offerDict['instructions'], offerDict['location'], offerDict['rewards'], offerDict['picture'] )
     offersList.append(newOffer)

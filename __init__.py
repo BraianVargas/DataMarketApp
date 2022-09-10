@@ -40,9 +40,9 @@ def getFiltered():
 @app.route('/search/', methods=['GET','POST'])
 def getOf():
     #Se recibe el argumento como KEY
-    OfferTitle = request.args.get('offer') 
+    OfferTitle = request.args.get('offer')
+    #Se dividen los datos entrantes en una lista
     OfferTitle=OfferTitle.split()
-    print(OfferTitle)
     i = getOffers(OfferTitle)
     return i
 
