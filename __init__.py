@@ -29,13 +29,6 @@ def getOfferById(offerId):
     i = getOfferByIds(offerId)
     return i
 
-@app.route('/filter/', methods=['GET','POST'])
-def getFiltered():
-    filters = None
-    filters = request.get_json()
-    i = getOffer(filters)
-    return i
-
 
 @app.route('/search/', methods=['GET','POST'])
 def getOf():
@@ -43,14 +36,15 @@ def getOf():
     OfferTitle = request.args.get('offer')
     #Se dividen los datos entrantes en una lista
     OfferTitle=OfferTitle.split()
-    i = getOffers(OfferTitle)
+    i = get_offers(OfferTitle)
     return i
 
 # ---------------------- POST routes ----------------------
-@app.route('/createOffer', methods=['POST'])
-def createOffer():
+@app.route('/crearOferta', methods=['POST'])
+def crear():
     data = (request.get_json())
-    statMessage = createNewOffer(offersList, data)
+    statMessage = create_new_offer(data)
+    print(statMessage)
     return statMessage
 
 
