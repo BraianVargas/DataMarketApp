@@ -5,7 +5,7 @@ from flask import (
 app = Flask(__name__)
 app.config.from_pyfile("DataFiles/config.py")
 
-from .Controllers.Modules import *
+from .Controllers.OffersController import *
 from .Commons.schema import *
 from .Commons.db import getDB
 
@@ -32,14 +32,19 @@ def getOfferById(offerId):
 @app.route('/filter/', methods=['GET','POST'])
 def getFiltered():
     filters = None
-    if request.method=='POST':
-        filters = request.get_json()
-        i = getOffer(filters)
-        return i
-    else:
-        filters = request.get_json()
-        i = getOffer(filters)
-        return i
+    filters = request.get_json()
+    i = getOffer(filters)
+    return i
+
+
+@app.route('/search/', methods=['GET','POST'])
+def getOf():
+    #Se recibe el argumento como KEY
+    OfferTitle = request.args.get('offer')
+    #Se dividen los datos entrantes en una lista
+    OfferTitle=OfferTitle.split()
+    i = getOffers(OfferTitle)
+    return i
 
 # ---------------------- POST routes ----------------------
 @app.route('/createOffer', methods=['POST'])
