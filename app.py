@@ -15,8 +15,6 @@ from App.Users import usersBP
 app.register_blueprint(usersBP, url_prefix = '/users')
 
 
-app.register_blueprint(usersBP, url_prefix = '/offers')
-
 
 
 

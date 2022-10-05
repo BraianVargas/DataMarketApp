@@ -33,17 +33,3 @@ def indexUsers():
     return "INDEX USER"
 
     
-@usersBP.route('/new', methods = ["GET","POST"])
-def createUser():
-    #
-    # if is logged in as administrator
-    #
-    data = request.get_json()
-
-    message = createNewUser(data)
-
-    return message
-    
-@usersBP.route('/')
-def indexUsers():
-    return "INDEX USER"

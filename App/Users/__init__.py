@@ -1,4 +1,3 @@
-from unicodedata import name
 from flask import Blueprint
 
 usersBP = Blueprint('users_BP', __name__)
