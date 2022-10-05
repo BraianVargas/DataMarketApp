@@ -61,8 +61,14 @@ CREATE TABLE `paymentinformation` (
   `linkedBankAccountNumber` INT DEFAULT NULL
 );
 
+CREATE TABLE `user`(
+  `username` TEXT NOT NULL,
+  `password` TEXT NOT NULL,
+  `role` TEXT NOT NULL DEFAULT "user",
+  `token` TEXT NOT NULL
+)
 
-CREATE TABLE `users` (
+CREATE TABLE `profile` (
     `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
     `name` TEXT NOT NULL,
@@ -74,8 +80,6 @@ CREATE TABLE `users` (
     `postCode` TEXT NOT NULL,
     `phoneNumber` TEXT NOT NULL,
     `country` TEXT NOT NULL,
-    `password` TEXT NOT NULL,
-    `role` TEXT NOT NULL DEFAULT "user"
 );
 
 CREATE TABLE `profileQuestion`(
