@@ -1,67 +1,110 @@
 CREATE TABLE `offers` (
-  `offerId` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `companyName` varchar(50) DEFAULT NULL,
-  `offerTitle` varchar(50) DEFAULT NULL,
-  `industry` varchar(50) DEFAULT NULL,
-  `type` varchar(50) DEFAULT NULL,
-  `verification` tinyint(1) DEFAULT NULL,
-  `reviews` varchar(50) DEFAULT NULL,
-  `appliedUsers` varchar(50) DEFAULT NULL,
-  `offersAvailables` varchar(50) DEFAULT NULL,
-  `offersLefts` varchar(50) DEFAULT NULL,
-  `companyDescription` text DEFAULT NULL,
-  `description` text DEFAULT NULL,
-  `instructions` varchar(50) DEFAULT NULL,
-  `location` varchar(50) DEFAULT NULL,
-  `rewards` varchar(50) DEFAULT NULL,
-  `picture` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+    `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+    `companyName` TEXT DEFAULT NULL,
+    `offerTitle` TEXT DEFAULT NULL,
+    `industry` TEXT DEFAULT NULL,
+    `type` TEXT DEFAULT NULL,
+    `verification` TINYINT(1) DEFAULT NULL,
+    `reviews` TEXT DEFAULT NULL,
+    `appliedUsers` TEXT DEFAULT NULL,
+    `offersAvailables` TEXT DEFAULT NULL,
+    `offersLefts` TEXT DEFAULT NULL,
+    `companyDescription` text DEFAULT NULL,
+    `description` text DEFAULT NULL,
+    `instructions` TEXT DEFAULT NULL,
+    `location` TEXT DEFAULT NULL,
+    `rewards` TEXT DEFAULT NULL,
+    `picture` TEXT DEFAULT NULL,
+    `idCreator` INT DEFAULT NULL
+);
 
---
--- Volcado de datos para la tabla `offers`
---
 
-INSERT INTO `offers` (`offerId`, `created_at`, `companyName`, `offerTitle`, `industry`, `type`, `verification`, `reviews`, `appliedUsers`, `offersAvailables`, `offersLefts`, `companyDescription`, `description`, `instructions`, `location`, `rewards`, `picture`) VALUES
-(1, '0000-00-00 00:00:00', 'Captus Ltd', 'Kombucha tropical flavors', 'beverages/softdrink manufacturing', 'Product testing & Survey', 0, '4.5', '800', '80', '20', 'Authentic kombucha fermented with no shortcuts', 'We are looking for great people with passion about eating healthy and wellbing. We are developing a range of new tropical flavors for our kombucha, becuase Healthy could be testy as well. So, do yourselft and your gut a favor  + boost your immute system and help us to develop and explore these amazing flavors', 'when you click in Apply and  accept this offer you', 'Sydney-Australia', '0', ''),
-(2, '0000-00-00 00:00:00', 'iota', 'Kombucha tropical flavors', 'beverages/softdrink manufacturing', 'Product testing & Survey', 0, '4.5', '800', '80', '20', 'Authentic kombucha fermented with no shortcuts', 'We are looking for great people with passion about eating healthy and wellbing. We are developing a range of new tropical flavors for our kombucha, becuase Healthy could be testy as well. So, do yourselft and your gut a favor  + boost your immute system and help us to develop and explore these amazing flavors', 'when you click in Apply and  accept this offer you', 'Sydney-Australia', '0', ''),
-(3, '0000-00-00 00:00:00', 'Lab', 'Laboratory Trials', 'healthcare and health technology', 'Product testing & Survey', 0, '', '', '', '', '', '', '', '', '', '');
+CREATE TABLE `productTesting`(
+  `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `productType` TEXT DEFAULT NULL,
+  `feedback` TEXT DEFAULT NULL,
+  `testStatus` TEXT DEFAULT NULL,
+  `dateOfReception` TIMESTAMP DEFAULT current_timestamp()
+);
 
--- --------------------------------------------------------
+CREATE TABLE `surveyQuestions`(
+  `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `content` TEXT DEFAULT NULL,
+  `creatorId` INT DEFAULT NULL,
+  `testStatus` TEXT DEFAULT NULL
+);
 
---
--- Estructura de tabla para la tabla `paymentinformation`
---
+CREATE TABLE `surveyAnswer`(
+  `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `content` TEXT DEFAULT NULL,
+  `userId` INT DEFAULT NULL,
+  `questionId` INT DEFAULT NULL,
+  `testStatus` TEXT DEFAULT NULL
+);
+
+
+CREATE TABLE `dataRequest`(
+  `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `creatorId` INT DEFAULT NULL,
+  `geolocation` TEXT DEFAULT NULL,
+  `timeSpendingOnCalls` TEXT DEFAULT NULL,
+  `country` TEXT DEFAULT NULL
+);
 
 CREATE TABLE `paymentinformation` (
-  `id` int(11) NOT NULL,
+  `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `linkedWallet` text DEFAULT NULL,
   `linkedSecundaryWallet` text DEFAULT NULL,
   `linkedBankAccountName` text DEFAULT NULL,
-  `linkedBankAccountNumber` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `user`
---
-
-CREATE TABLE `user` (
-  `userId` int(11) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `name` varchar(50) NOT NULL,
-  `nickname` varchar(50) NOT NULL,
-  `lastName` varchar(50) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `address` varchar(50) NOT NULL,
-  `state` varchar(50) NOT NULL,
-  `postCode` varchar(50) NOT NULL,
-  `phoneNumber` varchar(50) NOT NULL,
-  `country` varchar(50) NOT NULL,
-  `password` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `linkedBankAccountNumber` INT DEFAULT NULL
+);
 
 
+CREATE TABLE `users` (
+    `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+    `name` TEXT NOT NULL,
+    `nickname` TEXT NOT NULL,
+    `lastName` TEXT NOT NULL,
+    `email` TEXT NOT NULL,
+    `address` TEXT NOT NULL,
+    `state` TEXT NOT NULL,
+    `postCode` TEXT NOT NULL,
+    `phoneNumber` TEXT NOT NULL,
+    `country` TEXT NOT NULL,
+    `password` TEXT NOT NULL,
+    `role` TEXT NOT NULL DEFAULT "user"
+);
 
+CREATE TABLE `profileQuestion`(
+  `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `questionName` TEXT DEFAULT NULL,
+  `questionGroup` TEXT DEFAULT NULL,
+  `questionGroupDisplay` TEXT DEFAULT NULL,
+  `questionDescription` TEXT DEFAULT NULL,
+  `questionType` TEXT DEFAULT NULL,
+  `answerOptionId` INT DEFAULT NULL,
+  `additionalComents` TEXT DEFAULT NULL,
+  `sysActive` TINYINT(1) DEFAULT NULL
+);
+
+CREATE TABLE `profileAnswer`(
+  `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `answerName` TEXT DEFAULT NULL,
+  `answerGroup` TEXT DEFAULT NULL,
+  `answerGroupDisplay` TEXT DEFAULT NULL,
+  `answerDescription` TEXT DEFAULT NULL,
+  `answerType` TEXT DEFAULT NULL,
+  `answerOptionId` INT DEFAULT null,
+  `additionalComents` TEXT DEFAULT NULL,
+  `sysActive` TINYINT(1) DEFAULT NULL
+);
+
+CREATE TABLE `profileUserDetail`(
+  `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `questionId` INT DEFAULT NULL,
+  `answerId` INT DEFAULT NULL,
+  `userId` INT DEFAULT NULL
+);

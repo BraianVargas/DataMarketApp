@@ -1,23 +1,9 @@
-from flask import (
-    Flask, request, g
-    )
-
-app = Flask(__name__)
-app.config.from_pyfile("DataFiles/config.py")
-
-from .Controllers.OffersController import *
-from .Commons.schema import *
-from .Commons.db import getDB
-
-offersList = []
-
-dictionaryList = []
 
 # ---------------------- GET routes ----------------------
 @app.route("/getOffers")
 def getAll():
     db, c = getDB()
-    c.execute("SELECT * FROM offers ORDER BY offerId ASC ")
+    c.execute("SELECT * FROM offers ORDER BY id ASC ")
     offers = c.fetchall()
     if offers!=None:
         return offers
@@ -46,8 +32,3 @@ def crear():
     statMessage = create_new_offer(data)
     print(statMessage)
     return statMessage
-
-
-# if __name__=='__main__':
-#     app.run(debug=True)
-#     app.run()

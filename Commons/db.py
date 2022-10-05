@@ -4,7 +4,7 @@ import click
 from flask import current_app, g
 from flask.cli import with_appcontext
 
-from ..Commons.schema import instructions
+from Commons.schema import instructions
 
 def getDB():
     if 'db' not in g:
@@ -26,6 +26,7 @@ def init_db():
     db.commit()
 
 @click.command('init-db')
+@with_appcontext
 def init_db_command():
     init_db()
     click.echo('Initialized the database.')
