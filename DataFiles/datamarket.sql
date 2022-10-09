@@ -62,6 +62,7 @@ CREATE TABLE `paymentinformation` (
 );
 
 CREATE TABLE `user`(
+  `id` INT PRIMARY KEY NOT NULL,
   `username` TEXT NOT NULL,
   `password` TEXT NOT NULL,
   `role` TEXT NOT NULL DEFAULT "user",
@@ -80,6 +81,8 @@ CREATE TABLE `profile` (
     `postCode` TEXT NOT NULL,
     `phoneNumber` TEXT NOT NULL,
     `country` TEXT NOT NULL,
+    `userId` INT,
+    FOREIGN KEY ('userId') REFERENCES user(id)
 );
 
 CREATE TABLE `profileQuestion`(
