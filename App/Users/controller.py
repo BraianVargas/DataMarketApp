@@ -3,7 +3,7 @@ from Commons.db import getDB
 def createNewUser(offerDict):
     db,c = getDB()
 
-    q = "INSERT INTO users "
+    q = "INSERT INTO profile "
     keys = []
     values = []    
     for key,value in offerDict.items():
@@ -34,3 +34,25 @@ def createNewUser(offerDict):
         print(e)
         return F"FATAL ERROR. {e}"
     return "202 - Status Ok - User Created"
+
+
+def get_users(userDict):
+    db, c = getDB()
+    filtered=[]
+    query = "SELECT * FROM profile WHERE "
+
+    flag = 0 # Bandera de posicion inicial
+    # Añadir control de excepciones
+    for key,value in userDict.items():
+        if flag == 0:
+            query += f" {key} LIKE '%{value}%' "
+            flag += 1
+        else:
+            query += f" || {key} LIKE '%{value}%' "
+    print(query)
+    c.execute(query)
+    filtered = c.fetchall()
+    if filtered != None:
+        return filtered
+    else:
+        return "404 - User Not Match"

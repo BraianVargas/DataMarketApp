@@ -9,6 +9,7 @@ from Commons.schema import *
 from Commons.db import getDB
 from flask_login import LoginManager
 from App.Users.models import users
+
 # importa el blueprint y lo registra
 from App.Users import usersBP
 app.register_blueprint(usersBP, url_prefix = '/users')

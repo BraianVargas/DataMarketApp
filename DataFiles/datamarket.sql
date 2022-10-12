@@ -61,15 +61,15 @@ CREATE TABLE `paymentinformation` (
   `linkedBankAccountNumber` INT DEFAULT NULL
 );
 
-CREATE TABLE `user`(
+CREATE TABLE `users`(
   `id` INT PRIMARY KEY NOT NULL,
   `username` TEXT NOT NULL,
   `password` TEXT NOT NULL,
   `role` TEXT NOT NULL DEFAULT "user",
   `token` TEXT NOT NULL
-)
+);
 
-CREATE TABLE `profile` (
+CREATE TABLE `profile`(
     `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
     `name` TEXT NOT NULL,
@@ -82,7 +82,7 @@ CREATE TABLE `profile` (
     `phoneNumber` TEXT NOT NULL,
     `country` TEXT NOT NULL,
     `userId` INT,
-    FOREIGN KEY ('userId') REFERENCES user(id)
+    FOREIGN KEY (`userId`) REFERENCES users(id)
 );
 
 CREATE TABLE `profileQuestion`(
@@ -114,4 +114,4 @@ CREATE TABLE `profileUserDetail`(
   `questionId` INT DEFAULT NULL,
   `answerId` INT DEFAULT NULL,
   `userId` INT DEFAULT NULL
-);
+);  

@@ -5,7 +5,7 @@ from Commons.db import getDB
 
 
 
-from .controller import createNewUser
+from .controller import *
 from . import usersBP
 from .models import User,users, get_user
 
@@ -24,6 +24,14 @@ def getUsers():
         return users
     else:
         return "404 - User Table Is Empty"
+
+@usersBP.route("/search", methods=['GET','POST'])
+def searchUser():
+    #Se recibe el argumento como KEY
+    i = get_users(request.get_json())
+    return i
+
+
 
 @usersBP.route('/new', methods = ["POST"])
 def createUser():
@@ -67,3 +75,11 @@ def login():
 def logout():
     logout_user()
     return "Cerro sesion"
+
+
+@usersBP.route('/register')
+def registerUser():
+    data = (request.get_json())
+    statMessage = createNewUser(data)
+    print(statMessage)
+    return statMessage
