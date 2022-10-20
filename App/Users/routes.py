@@ -2,9 +2,6 @@ from flask import request,redirect,url_for
 from flask_login import login_required, current_user,login_user,logout_user
 from Commons.db import getDB
 
-
-
-
 from .controller import *
 from . import usersBP
 from .models import User,users, get_user
@@ -12,41 +9,6 @@ from .models import User,users, get_user
 #Esto solo es necesario para las pruebas
 usuario=User(1, "Matias", "pepito@gmail.com", "lala1234")
 users.append(usuario)
-
-
-@usersBP.route('/getusers', methods=["GET","POST"])
-def getUsers():
-    db, c = getDB()
-    c.execute("SELECT * FROM users ORDER BY id ASC")
-    users = c.fetchall()
-
-    if users != None:
-        return users
-    else:
-        return "404 - User Table Is Empty"
-
-@usersBP.route("/search", methods=['GET','POST'])
-def searchUser():
-    #Se recibe el argumento como KEY
-    i = get_users(request.get_json())
-    return i
-
-
-
-@usersBP.route('/new', methods = ["POST"])
-def createUser():
-    #
-    # if is logged in as administrator
-    #
-    data = request.get_json()
-
-    message = createNewUser(data)
-
-    return message
-    
-@usersBP.route('/')
-def indexUsers():
-    return "INDEX USER"
 
 #Login
 @usersBP.route('/login', methods=['GET', 'POST'])
@@ -72,6 +34,7 @@ def login():
 
 #Desloguea al usuario
 @usersBP.route('/logout')
+@login_required
 def logout():
     logout_user()
     return "Cerro sesion"
@@ -83,3 +46,53 @@ def registerUser():
     statMessage = createNewUser(data)
     print(statMessage)
     return statMessage
+
+
+# ----------------------------- BUSQUEDAS Y FILTROS --------------------------------------
+
+@usersBP.route('/getusers', methods=["GET","POST"])
+@login_required
+def getUsers():
+    db, c = getDB()
+    c.execute("SELECT * FROM users ORDER BY id ASC")
+    users = c.fetchall()
+
+    if users != None:
+        return users
+    else:
+        return "404 - User Table Is Empty"
+
+@usersBP.route("/search", methods=['GET','POST'])
+@login_required
+def searchUser():
+    #Se recibe el argumento como KEY
+    i = get_users(request.get_json())
+    return i
+
+@usersBP.route('/new', methods = ["POST"])
+@login_required # 
+def createUser():
+    #
+    # if is logged in as administrator
+    #
+    data = request.get_json()
+
+    message = createNewUser(data)
+
+    return message
+    
+
+# ----------------------------- VERIFICACIÓN DE USUARIO --------------------------------------
+@usersBP.route('/verification', methods=['GET','POST'])
+@login_required
+def verifiationOfUser():
+    # se hace uso de la tabla 'profileUserDetail' como 'Fact Table'  
+    # la cual va a guardar los id de las operaciónes de las questions y answers 
+    # que se encuentran en las tablas 'questionSurvey' y 'answerSurvey'
+    
+    return None
+
+
+@usersBP.route('/')
+def indexUsers():
+    return "INDEX USER"

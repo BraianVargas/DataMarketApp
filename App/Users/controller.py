@@ -36,23 +36,33 @@ def createNewUser(offerDict):
     return "202 - Status Ok - User Created"
 
 
+
 def get_users(userDict):
     db, c = getDB()
     filtered=[]
     query = "SELECT * FROM profile WHERE "
-
     flag = 0 # Bandera de posicion inicial
-    # Añadir control de excepciones
-    for key,value in userDict.items():
-        if flag == 0:
-            query += f" {key} LIKE '%{value}%' "
-            flag += 1
+    try:
+        for key,value in userDict.items():
+            if flag == 0:
+                query += f" {key} LIKE '%{value}%' "
+                flag += 1
+            else:
+                query += f" || {key} LIKE '%{value}%' "
+        c.execute(query)
+        filtered = c.fetchall()
+        if filtered != None:
+            return filtered
         else:
-            query += f" || {key} LIKE '%{value}%' "
-    print(query)
-    c.execute(query)
-    filtered = c.fetchall()
-    if filtered != None:
-        return filtered
-    else:
-        return "404 - User Not Match"
+            return "404 - User Not Match"
+    except Exception as e:
+        return f"Fatal Error. {e}"
+
+
+
+# ----------------------------- USER VERIFICATION --------------------------------------
+
+def userVerification():
+    db, c = getDB()
+    questions = []
+    query = "SELECT * FROM "

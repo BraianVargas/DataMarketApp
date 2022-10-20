@@ -5,7 +5,7 @@ CREATE TABLE `offers` (
     `offerTitle` TEXT DEFAULT NULL,
     `industry` TEXT DEFAULT NULL,
     `type` TEXT DEFAULT NULL,
-    `verification` TINYINT(1) DEFAULT NULL,
+    `verification` TINYINT(1) DEFAULT 1,
     `reviews` TEXT DEFAULT NULL,
     `appliedUsers` TEXT DEFAULT NULL,
     `offersAvailables` TEXT DEFAULT NULL,
@@ -42,7 +42,6 @@ CREATE TABLE `surveyAnswer`(
   `questionId` INT DEFAULT NULL,
   `testStatus` TEXT DEFAULT NULL
 );
-
 
 CREATE TABLE `dataRequest`(
   `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -82,7 +81,15 @@ CREATE TABLE `profile`(
     `phoneNumber` TEXT NOT NULL,
     `country` TEXT NOT NULL,
     `userId` INT,
+    `isVerified` TINYINT(1) NOT NULL DEFAULT 1,
     FOREIGN KEY (`userId`) REFERENCES users(id)
+);
+
+CREATE TABLE `profileSurvey`(
+  `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `questionGroup` TEXT DEFAULT NULL,
+  `questionType` TEXT DEFAULT NULL,
+  `sysActive` TINYINT(1) NOT NULL DEFAULT 1
 );
 
 CREATE TABLE `profileQuestion`(
@@ -94,7 +101,7 @@ CREATE TABLE `profileQuestion`(
   `questionType` TEXT DEFAULT NULL,
   `answerOptionId` INT DEFAULT NULL,
   `additionalComents` TEXT DEFAULT NULL,
-  `sysActive` TINYINT(1) DEFAULT NULL
+  `sysActive` TINYINT(1) DEFAULT 1
 );
 
 CREATE TABLE `profileAnswer`(
@@ -104,9 +111,9 @@ CREATE TABLE `profileAnswer`(
   `answerGroupDisplay` TEXT DEFAULT NULL,
   `answerDescription` TEXT DEFAULT NULL,
   `answerType` TEXT DEFAULT NULL,
-  `answerOptionId` INT DEFAULT null,
+  `answerOptionId` INT DEFAULT NULL,
   `additionalComents` TEXT DEFAULT NULL,
-  `sysActive` TINYINT(1) DEFAULT NULL
+  `sysActive` TINYINT(1) DEFAULT 1
 );
 
 CREATE TABLE `profileUserDetail`(
