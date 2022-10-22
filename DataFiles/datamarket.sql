@@ -81,15 +81,8 @@ CREATE TABLE `profile`(
     `phoneNumber` TEXT NOT NULL,
     `country` TEXT NOT NULL,
     `userId` INT,
-    `isVerified` TINYINT(1) NOT NULL DEFAULT 1,
+    `isVerified` TINYINT(1) NOT NULL DEFAULT 0,
     FOREIGN KEY (`userId`) REFERENCES users(id)
-);
-
-CREATE TABLE `profileSurvey`(
-  `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  `questionGroup` TEXT DEFAULT NULL,
-  `questionType` TEXT DEFAULT NULL,
-  `sysActive` TINYINT(1) NOT NULL DEFAULT 1
 );
 
 CREATE TABLE `profileQuestion`(

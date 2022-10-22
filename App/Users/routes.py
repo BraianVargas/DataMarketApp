@@ -84,15 +84,21 @@ def createUser():
 
 # ----------------------------- VERIFICACIÓN DE USUARIO --------------------------------------
 @usersBP.route('/verification', methods=['GET','POST'])
-@login_required
+# @login_required
 def verifiationOfUser():
     # se hace uso de la tabla 'profileUserDetail' como 'Fact Table'  
     # la cual va a guardar los id de las operaciónes de las questions y answers 
     # que se encuentran en las tablas 'questionSurvey' y 'answerSurvey'
-    
-    return None
+    db, c = getDB()
+    if request.method == 'GET':
+        query = c.execute("SELECT * FROM profileQuestion")
+        questions = c.fetchall()
+        return questions
+    else:
+        return None
 
 
 @usersBP.route('/')
 def indexUsers():
     return "INDEX USER"
+
