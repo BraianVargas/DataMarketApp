@@ -6,50 +6,7 @@ from .controller import *
 from . import usersBP
 from .models import User,users, get_user
 
-#Esto solo es necesario para las pruebas
-usuario=User(1, "Matias", "pepito@gmail.com", "lala1234")
-users.append(usuario)
-
-#Login
-@usersBP.route('/login', methods=['GET', 'POST'])
-def login():
-    #Autentica si el usuario esta logeado
-    if current_user.is_authenticated:
-        return "ya inicioo sesion"
-    
-    #Si no esta logeado toma los datos del formulario
-    user = request.args.get('user')
-    password = request.args.get('password')
-    remember_me = request.args.get('remember')
-    #Esto simula la busqueda en la base de datos
-    user = get_user(user)
-    #Comprueba si el usuario existe y la contraseña es la misma
-    if user is not None and user.check_password(password):
-        #Loguea al usuario si todo funciono
-        login_user(user, remember=remember_me)
-        return "Se pudo loguear"
-    #Avisa en caso de que no se pudiera loguear correctamente
-    return "La contraseña o usuario estan mal"
-
-
-#Desloguea al usuario
-@usersBP.route('/logout')
-@login_required
-def logout():
-    logout_user()
-    return "Cerro sesion"
-
-
-@usersBP.route('/register')
-def registerUser():
-    data = (request.get_json())
-    statMessage = createNewUser(data)
-    print(statMessage)
-    return statMessage
-
-
 # ----------------------------- BUSQUEDAS Y FILTROS --------------------------------------
-
 @usersBP.route('/getusers', methods=["GET","POST"])
 # @login_required
 def getUsers():
@@ -80,6 +37,12 @@ def createUser():
     message = createNewUser(data)
 
     return message
+    
+
+# ----------------------------- PROFILE QUESTION --------------------------------------
+@usersBP.route('/new')
+def newQuestion
+
 
 # ----------------------------- VERIFICACIÓN DE USUARIO --------------------------------------
 @usersBP.route('/verification', methods=['GET','POST'])

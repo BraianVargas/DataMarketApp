@@ -14,6 +14,9 @@ from App.Users.models import users
 from App.Users import usersBP
 app.register_blueprint(usersBP, url_prefix = '/users')
 
+from App.Profile import profileBP
+app.register_blueprint(profileBP, url_prefix = '/profile')
+
 #genera el administrar de logeo
 login_manager = LoginManager(app)
 @login_manager.user_loader
