@@ -1,10 +1,14 @@
 from flask import request,redirect,url_for
 from flask_login import login_required, current_user,login_user,logout_user
+from App.Users import usersBP
 from Commons.db import getDB
 
 from .controller import *
-from . import usersBP
-from .models import User,users, get_user
+
+# ----------------------------- PASAR A PROFILE --------------------------------------
+# ----------------------------- CAMBIAR LAS RUTAS Y MÉTODOS PARA REFERIRLOS DE usersBP a profileBP --------------------------------------
+
+
 
 # ----------------------------- BUSQUEDAS Y FILTROS --------------------------------------
 @usersBP.route('/getusers', methods=["GET","POST"])
@@ -26,7 +30,7 @@ def searchUser():
     i = get_users(request.get_json())
     return i
 
-@usersBP.route('/new', methods = ["POST"])
+@usersBP.route('/questions/new', methods = ["POST"])
 # @login_required 
 def createUser():
     #
@@ -37,12 +41,6 @@ def createUser():
     message = createNewUser(data)
 
     return message
-    
-
-# ----------------------------- PROFILE QUESTION --------------------------------------
-@usersBP.route('/new')
-def newQuestion
-
 
 # ----------------------------- VERIFICACIÓN DE USUARIO --------------------------------------
 @usersBP.route('/verification', methods=['GET','POST'])

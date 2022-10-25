@@ -10,14 +10,20 @@ from Commons.db import getDB
 from flask_login import LoginManager
 from App.Users.models import users
 
-# importa el blueprint y lo registra
+# ----------------------------- IMPORTA Y REGISTRA LOS BLUEPRINTS --------------------------------------
 from App.Users import usersBP
 app.register_blueprint(usersBP, url_prefix = '/users')
 
 from App.Profile import profileBP
 app.register_blueprint(profileBP, url_prefix = '/profile')
 
-#genera el administrar de logeo
+from App.Profile.Surveys.Questions import questionsBP
+app.register_blueprint(questionsBP, url_prefix = '/questons')
+
+
+
+
+# ----------------------------- GENERA EL ADMINISTRADOR DE LOGIN --------------------------------------
 login_manager = LoginManager(app)
 @login_manager.user_loader
 def load_user(user_id):

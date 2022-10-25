@@ -1,120 +1,191 @@
+
 {
-    "question_name":"Name",
-    "question_group":"name",
-    "question_group_display":"1. What is your name?",
-    "question_description":"enter your name and deteils exactly as they appear on your ID or Doc used to verify your identity",
-    "question_type":"user entry",
-    "answer_options_id":"1",
-    "additional_comments":"This won't be displayed publicly, we only use this to match you with the perfect offers for you",
-    "sys_active":"1"
-},
-{
-    "question_name":"Last name",
-    "question_group":"name",
-    "question_group_display":"1. What is your name?",
-    "question_description":"enter your name and deteils exactly as they appear on your ID or Doc used to verify your identity",
-    "question_type":"user entry",
-    "answer_options_id":"1",
-    "additional_comments":"This won't be displayed publicly, we only use this to match you with the perfect offers for you",
-    "sys_active":"1"
-},
-{
-    "question_name":"Gender",
-    "question_group":"Gender",
-    "question_group_display":"1. What's your gender?",
-    "question_description":"Define your gender will help us to find relevants offers for you",
-    "question_type":"Multiple choice",
-    "answer_options_id":"1",
-    "additional_comments":"This won't be displayed publicly, we only use this to match you with the perfect offers for you",
-    "sys_active":"1"
-},
-{
-    "question_name":"Date of birth",
-    "question_group":"Gender",
-    "question_group_display":"1. What's your gender?",
-    "question_description":"Define your gender will help us to find relevants offers for you",
-    "question_type":"Multiple choice",
-    "answer_options_id":"1",
-    "additional_comments":"This won't be displayed publicly, we only use this to match you with the perfect offers for you",
-    "sys_active":"1"
-},
-{
-    "question_name":"Country",
-    "question_group":"address",
-    "question_group_display":"1. What is your address?",
-    "question_description":"enter your country",
-    "question_type":"user entry",
-    "answer_options_id":"1",
-    "additional_comments":"",
-    "sys_active":"1"
-},
-{
-    "question_name":"State/Province",
-    "question_group":"address",
-    "question_group_display":"1. What is your address?",
-    "question_description":"enter your state or province of residence",
-    "question_type":"user entry",
-    "answer_options_id":"1",
-    "additional_comments":"",
-    "sys_active":"1"
-},
-{
-    "question_name":"Postcode",
-    "question_group":"address",
-    "question_group_display":"1. What is your address?",
-    "question_description":"enter your postcode",
-    "question_type":"user entry",
-    "answer_options_id":"1",
-    "additional_comments":"",
-    "sys_active":"1"
-},
-{
-    "question_name":"Street name",
-    "question_group":"address",
-    "question_group_display":"1. What is your address?",
-    "question_description":"enter your street name or rd name",
-    "question_type":"user entry",
-    "answer_options_id":"1",
-    "additional_comments":"",
-    "sys_active":"1"
+    "questionName": "Name",
+    "questionGroup": "name",
+    "questionGroupDisplay": "1. What is your name?",
+    "questionDescription": "please enter your name and details exactly as they appear on your ID or Doc used to vefiry your identity",
+    "questionType": "user entry",
+    "answerOptionId": "1",
+    "additionalComents": "This won't be displayed publicly we only use this to match you with the perfect offers for you",
+    "sysActive": 1
 }
-,{
-    "question_name":"Street number",
-    "question_group":"address",
-    "question_group_display":"1. What is your address?",
-    "question_description":"enter your street number",
-    "question_type":"user entry",
-    "answer_options_id":"2",
-    "additional_comments":"",
-    "sys_active":"1"
+{
+    "questionName": "Last Name",
+    "questionGroup": "name",
+    "questionGroupDisplay": "1. What is your name?",
+    "questionDescription": "please enter your name and details exactly as they appear on your ID or Doc used to vefiry your identity",
+    "questionType": "user entry",
+    "answerOptionId": "1",
+    "additionalComents": "This won't be displayed publicly we only use this to match you with the perfect offers for you",
+    "sysActive": 1
 }
-,{
-    "question_name":"Apartment/Flat/Unit number",
-    "question_group":"address",
-    "question_group_display":"1. What is your address?",
-    "question_description":"enter your flat or apartment number",
-    "question_type":"user entry",
-    "answer_options_id":"1",
-    "additional_comments":"",
-    "sys_active":"1"
+{
+    "questionName": "gender",
+    "questionGroup": "gender",
+    "questionGroupDisplay": "3. What's your gender?",
+    "questionDescription": "define your gender will help us to find relevants offers for you",
+    "questionType": "Multiple choice",
+    "answerOptionId": "4",
+    "additionalComents": "This won't be displayed publicly we only use this to match you with the perfect offers for you",
+    "sysActive": "1"
 }
-,{
-    "question_name":"Additional residence information",
-    "question_group":"address",
-    "question_group_display":"1. What is your address?",
-    "question_description":"any additional information if needed",
-    "question_type":"user entry",
-    "answer_options_id":"1",
-    "additional_comments":"",
-    "sys_active":"1"
+{
+    "questionName": "date of birth",
+    "questionGroup": "age/date of birth",
+    "questionGroupDisplay": "4. What's your date of birth?",
+    "questionDescription": "please enter your name and details exactly as they appear on your ID or Doc used to vefiry your identity",
+    "questionType": "user entry",
+    "answerOptionId": "3",
+    "additionalComents": "This won't be displayed publicly we only use this to match you with the perfect offers for you",
+    "sysActive": 1
 }
-,{
-    "question_name":"Main Sport",
-    "question_group":"Sports",
-    "question_group_display":"2. Do you exercise regularity?",
-    "question_description":"Please select yes or no",
-    "question_type":"multiple choice",
-    "answer_options_id":"3",
-    "additional_comments":"",
-    "sys_active":"1"
+{
+    "questionName": "date of birth",
+    "questionGroup": "age/date of birth",
+    "questionGroupDisplay": "4. What's your date of birth?",
+    "questionDescription": "Day",
+    "questionType": "user entry",
+    "answerOptionId": "2",
+    "additionalComents": "This won't be displayed publicly we only use this to match you with the perfect offers for you",
+    "sysActive": 1
+}
+{
+    "questionName": "date of birth",
+    "questionGroup": "age/date of birth",
+    "questionGroupDisplay": "4. What's your date of birth?",
+    "questionDescription": "Month",
+    "questionType": "user entry",
+    "answerOptionId": "2",
+    "additionalComents": "This won't be displayed publicly we only use this to match you with the perfect offers for you",
+    "sysActive": 1
+}
+{
+    "questionName": "date of birth",
+    "questionGroup": "age/date of birth",
+    "questionGroupDisplay": "4. What's your date of birth?",
+    "questionDescription": "Year",
+    "questionType": "user entry",
+    "answerOptionId": "2",
+    "additionalComents": "This won't be displayed publicly we only use this to match you with the perfect offers for you",
+    "sysActive": 1
+}
+{
+    "questionName": "Country",
+    "questionGroup": "address",
+    "questionGroupDisplay": "5. What is your address?",
+    "questionDescription": "enter your country",
+    "questionType": "user entry",
+    "answerOptionId": "1",
+    "additionalComents": "This won't be displayed publicly we only use this to match you with the perfect offers for you",
+    "sysActive": 1
+}
+{
+    "questionName": "State/Province",
+    "questionGroup": "address",
+    "questionGroupDisplay": "5. What is your address?",
+    "questionDescription": "enter your state or province of residence",
+    "questionType": "user entry",
+    "answerOptionId": "1",
+    "additionalComents": "This won't be displayed publicly we only use this to match you with the perfect offers for you",
+    "sysActive": 1
+}
+{
+    "questionName": "Postcode",
+    "questionGroup": "address",
+    "questionGroupDisplay": "5. What is your address?",
+    "questionDescription": "enter your postcode",
+    "questionType": "user entry",
+    "answerOptionId": "1",
+    "additionalComents": "This won't be displayed publicly we only use this to match you with the perfect offers for you",
+    "sysActive": 1
+}
+{
+    "questionName": "Street name",
+    "questionGroup": "address",
+    "questionGroupDisplay": "5. What is your address?",
+    "questionDescription": "enter your street name or rd name",
+    "questionType": "user entry",
+    "answerOptionId": "1",
+    "additionalComents": "This won't be displayed publicly we only use this to match you with the perfect offers for you",
+    "sysActive": 1
+}
+{
+    "questionName": "Street number",
+    "questionGroup": "address",
+    "questionGroupDisplay": "5. What is your address?",
+    "questionDescription": "enter your street number",
+    "questionType": "user entry",
+    "answerOptionId": "2",
+    "additionalComents": "This won't be displayed publicly we only use this to match you with the perfect offers for you",
+    "sysActive": 1
+}
+{
+    "questionName": "Apartment/Flat/Unit number (if any)",
+    "questionGroup": "address",
+    "questionGroupDisplay": "5. What is your address?",
+    "questionDescription": "enter your flat or apartment number",
+    "questionType": "user entry",
+    "answerOptionId": "1",
+    "additionalComents": "This won't be displayed publicly we only use this to match you with the perfect offers for you",
+    "sysActive": 1
+}
+{
+    "questionName": "Additional residence information",
+    "questionGroup": "address",
+    "questionGroupDisplay": "5. What is your address?",
+    "questionDescription": "any additional information if needed",
+    "questionType": "user entry",
+    "answerOptionId": "1",
+    "additionalComents": "This won't be displayed publicly we only use this to match you with the perfect offers for you",
+    "sysActive": 1
+}
+{
+    "questionName": "Occupation status",
+    "questionGroup": "Occupation",
+    "questionGroupDisplay": "6.What best describes your current occupation status?",
+    "questionDescription": "You may select two options  or more options if relevant",
+    "questionType": "user entry",
+    "answerOptionId": "1",
+    "additionalComents": "This won't be displayed publicly we only use this to match you with the perfect offers for you",
+    "sysActive": 1
+}
+{
+    "questionName": "phone and contact verification",
+    "questionGroup": "contact",
+    "questionGroupDisplay": "7. What's your mobile phone number?",
+    "questionDescription": "please enter your phone number without country code",
+    "questionType": "user entry",
+    "answerOptionId": "2",
+    "additionalComents": "This won't be displayed publicly we only use this to match you with the perfect offers for you",
+    "sysActive": 1
+}
+{
+    "questionName": "phone verification",
+    "questionGroup": "contact",
+    "questionGroupDisplay": "Enter the verification code sent to your phone",
+    "questionDescription": "enter the code to complete the sign in proccess",
+    "questionType": "user entry",
+    "answerOptionId": "2",
+    "additionalComents": "This is part of the user validation",
+    "sysActive": 1
+}
+{
+    "questionName": "term and conditions",
+    "questionGroup": "term and conditions",
+    "questionGroupDisplay": "Please read the term and conditions before continue",
+    "questionDescription": "Please read the term and conditions before continue",
+    "questionType": "Multiple choice",
+    "answerOptionId": "",
+    "additionalComents": "",
+    "sysActive": 0
+}
+{
+    "questionName": "sport_main",
+    "questionGroup": "sports",
+    "questionGroupDisplay": "2. Do you exercise regularly?",
+    "questionDescription": "please enter yes or no",
+    "questionType": "Multiple choice",
+    "answerOptionId": "4",
+    "additionalComents": "This won't be displayed publicly we only use this to match you with the perfect offers for you",
+    "sysActive": 1
 }
