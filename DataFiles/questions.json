@@ -5,7 +5,37 @@
     "question_description":"enter your name and deteils exactly as they appear on your ID or Doc used to verify your identity",
     "question_type":"user entry",
     "answer_options_id":"1",
-    "additional_comments":"",
+    "additional_comments":"This won't be displayed publicly, we only use this to match you with the perfect offers for you",
+    "sys_active":"1"
+},
+{
+    "question_name":"Last name",
+    "question_group":"name",
+    "question_group_display":"1. What is your name?",
+    "question_description":"enter your name and deteils exactly as they appear on your ID or Doc used to verify your identity",
+    "question_type":"user entry",
+    "answer_options_id":"1",
+    "additional_comments":"This won't be displayed publicly, we only use this to match you with the perfect offers for you",
+    "sys_active":"1"
+},
+{
+    "question_name":"Gender",
+    "question_group":"Gender",
+    "question_group_display":"1. What's your gender?",
+    "question_description":"Define your gender will help us to find relevants offers for you",
+    "question_type":"Multiple choice",
+    "answer_options_id":"1",
+    "additional_comments":"This won't be displayed publicly, we only use this to match you with the perfect offers for you",
+    "sys_active":"1"
+},
+{
+    "question_name":"Date of birth",
+    "question_group":"Gender",
+    "question_group_display":"1. What's your gender?",
+    "question_description":"Define your gender will help us to find relevants offers for you",
+    "question_type":"Multiple choice",
+    "answer_options_id":"1",
+    "additional_comments":"This won't be displayed publicly, we only use this to match you with the perfect offers for you",
     "sys_active":"1"
 },
 {
