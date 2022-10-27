@@ -1,6 +1,6 @@
 from flask import request,redirect,url_for
 from flask_login import login_required, current_user,login_user,logout_user
-from App.Users import usersBP
+from App.Profile import profileBP
 from Commons.db import getDB
 
 from .controller import *
@@ -11,7 +11,7 @@ from .controller import *
 
 
 # ----------------------------- BUSQUEDAS Y FILTROS --------------------------------------
-@usersBP.route('/getusers', methods=["GET","POST"])
+@profileBP.route('/get/all', methods=["GET","POST"])
 # @login_required
 def getUsers():
     db, c = getDB()
@@ -23,27 +23,27 @@ def getUsers():
     else:
         return "404 - User Table Is Empty"
 
-@usersBP.route("/search", methods=['GET','POST'])
+@profileBP.route("/search", methods=['GET','POST'])
 @login_required
 def searchUser():
     #Se recibe el argumento como KEY
     i = get_users(request.get_json())
     return i
 
-@usersBP.route('/questions/new', methods = ["POST"])
+@profileBP.route('/new', methods = ["POST"])
 # @login_required 
-def createUser():
+def createProfile():
     #
     # if is logged in as administrator
     #
     data = request.get_json()
 
-    message = createNewUser(data)
+    message = createNewProfile(data)
 
     return message
 
 # ----------------------------- VERIFICACIÓN DE USUARIO --------------------------------------
-@usersBP.route('/verification', methods=['GET','POST'])
+@profileBP.route('/verification', methods=['GET','POST'])
 # @login_required
 def verifiationOfUser():
     # se hace uso de la tabla 'profileUserDetail' como 'Fact Table'  
@@ -58,7 +58,7 @@ def verifiationOfUser():
         return None
 
 
-@usersBP.route('/')
+@profileBP.route('/')
 def indexUsers():
-    return "INDEX USER"
+    return "INDEX PROFILE"
 

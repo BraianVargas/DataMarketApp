@@ -1,6 +1,6 @@
 from Commons.db import getDB
 
-def createNewUser(offerDict):
+def createNewProfile(offerDict):
     db,c = getDB()
 
     q = "INSERT INTO profile "
@@ -56,7 +56,6 @@ def get_users(userDict):
             return "404 - User Not Match"
     except Exception as e:
         return f"Fatal Error. {e}"
-
 
 
 # ----------------------------- USER VERIFICATION --------------------------------------
