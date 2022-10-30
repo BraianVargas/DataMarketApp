@@ -1,162 +1,162 @@
 {
-    "answer_name": "user entry string",
-    "answer_group": "user entry",
-    "answer_group_display": "null",
-    "answer_description": "please enter your answer",
-    "answer_type": "user entry string",
-    "answer_options_id": "1",
-    "additional_comments": ""
+    "answerName": "user entry string",
+    "answerGroup": "user entry",
+    "answerGroupDisplay": "null",
+    "answerDescription": "please enter your answer",
+    "answerType": "user entry string",
+    "answerOptionId": 1,
+    "additionalComents": ""
 }
 {
-    "answer_name": "user entry integer",
-    "answer_group": "user entry",
-    "answer_group_display": "null",
-    "answer_description": "please enter your answer - must contain number without letters or special characters",
-    "answer_type": "user entry integer",
-    "answer_options_id": "2",
-    "additional_comments": ""
+    "answerName": "user entry integer",
+    "answerGroup": "user entry",
+    "answerGroupDisplay": "null",
+    "answerDescription": "please enter your answer - must contain number without letters or special characters",
+    "answerType": "user entry integer",
+    "answerOptionId": 2,
+    "additionalComents": ""
 }
 {
-    "answer_name": "user entry date",
-    "answer_group": "user entry",
-    "answer_group_display": "dd/mm/yyyy",
-    "answer_description": "please enter your date of birth -format must by dd/mm/yyyy",
-    "answer_type": "user entry date",
-    "answer_options_id": "3",
-    "additional_comments": ""
+    "answerName": "user entry date",
+    "answerGroup": "user entry",
+    "answerGroupDisplay": "dd/mm/yyyy",
+    "answerDescription": "please enter your date of birth -format must by dd/mm/yyyy",
+    "answerType": "user entry date",
+    "answerOptionId": 3,
+    "additionalComents": ""
 }
 {
-    "answer_name": "multiple choice -yes",
-    "answer_group": "multiple choice bool",
-    "answer_group_display": "Yes",
-    "answer_description": "yes, if you do",
-    "answer_type": "multiple choice",
-    "answer_options_id": "4",
-    "additional_comments": ""
+    "answerName": "multiple choice -yes",
+    "answerGroup": "multiple choice bool",
+    "answerGroupDisplay": "Yes",
+    "answerDescription": "yes, if you do",
+    "answerType": "multiple choice",
+    "answerOptionId": 4,
+    "additionalComents": ""
 }
 {
-    "answer_name": "multiple choice -no",
-    "answer_group": "multiple choice bool",
-    "answer_group_display": "No",
-    "answer_description": "No, if you do not",
-    "answer_type": "multiple choice",
-    "answer_options_id": "4",
-    "additional_comments": ""
+    "answerName": "multiple choice -no",
+    "answerGroup": "multiple choice bool",
+    "answerGroupDisplay": "No",
+    "answerDescription": "No, if you do not",
+    "answerType": "multiple choice",
+    "answerOptionId": 4,
+    "additionalComents": ""
 }
 {
-    "answer_name": "multiple choice -Male",
-    "answer_group": "multiple choice bool",
-    "answer_group_display": "MALE",
-    "answer_description": "MALE",
-    "answer_type": "multiple choice",
-    "answer_options_id": "5",
-    "additional_comments": ""
+    "answerName": "multiple choice -Male",
+    "answerGroup": "multiple choice bool",
+    "answerGroupDisplay": "MALE",
+    "answerDescription": "MALE",
+    "answerType": "multiple choice",
+    "answerOptionId": 5,
+    "additionalComents": ""
 }
 {
-    "answer_name": "multiple choice -Female",
-    "answer_group": "multiple choice bool",
-    "answer_group_display": "FEMALE",
-    "answer_description": "FEMALE",
-    "answer_type": "multiple choice",
-    "answer_options_id": "5",
-    "additional_comments": ""
+    "answerName": "multiple choice -Female",
+    "answerGroup": "multiple choice bool",
+    "answerGroupDisplay": "FEMALE",
+    "answerDescription": "FEMALE",
+    "answerType": "multiple choice",
+    "answerOptionId": 5,
+    "additionalComents": ""
 }
 {
-    "answer_name": "multiple choice -NON BINARY",
-    "answer_group": "multiple choice bool",
-    "answer_group_display": "NON-BINARY",
-    "answer_description": "NON-BINARY",
-    "answer_type": "multiple choice",
-    "answer_options_id": "5",
-    "additional_comments": ""
+    "answerName": "multiple choice -NON BINARY",
+    "answerGroup": "multiple choice bool",
+    "answerGroupDisplay": "NON-BINARY",
+    "answerDescription": "NON-BINARY",
+    "answerType": "multiple choice",
+    "answerOptionId": 5,
+    "additionalComents": ""
 }
 {
-    "answer_name": "Full time work",
-    "answer_group": "multiple choice multiple",
-    "answer_group_display": "Full time work",
-    "answer_description": "work 8 hours or more",
-    "answer_type": "multiple choice",
-    "answer_options_id": "6",
-    "additional_comments": ""
+    "answerName": "Full time work",
+    "answerGroup": "multiple choice multiple",
+    "answerGroupDisplay": "Full time work",
+    "answerDescription": "work 8 hours or more",
+    "answerType": "multiple choice",
+    "answerOptionId": 6,
+    "additionalComents": ""
 }
 {
-    "answer_name": "Part time work",
-    "answer_group": "multiple choice bool",
-    "answer_group_display": "Part time or casual work",
-    "answer_description": "less than 8 hours daily",
-    "answer_type": "multiple choice",
-    "answer_options_id": "6",
-    "additional_comments": ""
+    "answerName": "Part time work",
+    "answerGroup": "multiple choice bool",
+    "answerGroupDisplay": "Part time or casual work",
+    "answerDescription": "less than 8 hours daily",
+    "answerType": "multiple choice",
+    "answerOptionId": 6,
+    "additionalComents": ""
 }
 {
-    "answer_name": "Casual, seasonal or temporary work",
-    "answer_group": "multiple choice bool",
-    "answer_group_display": "Casual, seasonal or temporary work",
-    "answer_description": "Casual work or seasonal",
-    "answer_type": "multiple choice",
-    "answer_options_id": "6",
-    "additional_comments": ""
+    "answerName": "Casual, seasonal or temporary work",
+    "answerGroup": "multiple choice bool",
+    "answerGroupDisplay": "Casual, seasonal or temporary work",
+    "answerDescription": "Casual work or seasonal",
+    "answerType": "multiple choice",
+    "answerOptionId": 6,
+    "additionalComents": ""
 }
 {
-    "answer_name": "Full time student",
-    "answer_group": "multiple choice bool",
-    "answer_group_display": "Full time student",
-    "answer_description": "unemployed full time student",
-    "answer_type": "multiple choice",
-    "answer_options_id": "6",
-    "additional_comments": ""
+    "answerName": "Full time student",
+    "answerGroup": "multiple choice bool",
+    "answerGroupDisplay": "Full time student",
+    "answerDescription": "unemployed full time student",
+    "answerType": "multiple choice",
+    "answerOptionId": 6,
+    "additionalComents": ""
 }
 {
-    "answer_name": "Part time student",
-    "answer_group": "multiple choice bool",
-    "answer_group_display": "Part time student",
-    "answer_description": "Part time student",
-    "answer_type": "multiple choice",
-    "answer_options_id": "6",
-    "additional_comments": ""
+    "answerName": "Part time student",
+    "answerGroup": "multiple choice bool",
+    "answerGroupDisplay": "Part time student",
+    "answerDescription": "Part time student",
+    "answerType": "multiple choice",
+    "answerOptionId": 6,
+    "additionalComents": ""
 }
 {
-    "answer_name": "Domestic home duties",
-    "answer_group": "multiple choice bool",
-    "answer_group_display": "Domestic home duties",
-    "answer_description": "",
-    "answer_type": "multiple choice",
-    "answer_options_id": "6",
-    "additional_comments": ""
+    "answerName": "Domestic home duties",
+    "answerGroup": "multiple choice bool",
+    "answerGroupDisplay": "Domestic home duties",
+    "answerDescription": "",
+    "answerType": "multiple choice",
+    "answerOptionId": 6,
+    "additionalComents": ""
 }
 {
-    "answer_name": "Retired",
-    "answer_group": "multiple choice bool",
-    "answer_group_display": "Retired",
-    "answer_description": "",
-    "answer_type": "multiple choice",
-    "answer_options_id": "6",
-    "additional_comments": ""
+    "answerName": "Retired",
+    "answerGroup": "multiple choice bool",
+    "answerGroupDisplay": "Retired",
+    "answerDescription": "",
+    "answerType": "multiple choice",
+    "answerOptionId": 6,
+    "additionalComents": ""
 }
 {
-    "answer_name": "Unemployed",
-    "answer_group": "multiple choice bool",
-    "answer_group_display": "Unemployed",
-    "answer_description": "",
-    "answer_type": "multiple choice",
-    "answer_options_id": "6",
-    "additional_comments": ""
+    "answerName": "Unemployed",
+    "answerGroup": "multiple choice bool",
+    "answerGroupDisplay": "Unemployed",
+    "answerDescription": "",
+    "answerType": "multiple choice",
+    "answerOptionId": 6,
+    "additionalComents": ""
 }
 {
-    "answer_name": "Other (please describe below)",
-    "answer_group": "multiple choice bool",
-    "answer_group_display": "Other (please describe below)",
-    "answer_description": "",
-    "answer_type": "multiple choice",
-    "answer_options_id": "6",
-    "additional_comments": ""
+    "answerName": "Other (please describe below)",
+    "answerGroup": "multiple choice bool",
+    "answerGroupDisplay": "Other (please describe below)",
+    "answerDescription": "",
+    "answerType": "multiple choice",
+    "answerOptionId": 6,
+    "additionalComents": ""
 }
 {
-    "answer_name": "Accept term and conditions",
-    "answer_group": "multiple choice bool",
-    "answer_group_display": "I have read, and agree to the Terms of service",
-    "answer_description": "",
-    "answer_type": "multiple choice",
-    "answer_options_id": "7",
-    "additional_comments": ""
+    "answerName": "Accept term and conditions",
+    "answerGroup": "multiple choice bool",
+    "answerGroupDisplay": "I have read, and agree to the Terms of service",
+    "answerDescription": "",
+    "answerType": "multiple choice",
+    "answerOptionId": 7,
+    "additionalComents": ""
 }

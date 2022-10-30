@@ -21,6 +21,10 @@ from App.Profile.Surveys.Questions import questionsBP
 app.register_blueprint(questionsBP, url_prefix = '/questons')
 
 
+from App.Profile.Surveys.Answers import answersBP
+app.register_blueprint(answersBP, url_prefix = '/answers')
+
+
 
 
 # ----------------------------- GENERA EL ADMINISTRADOR DE LOGIN --------------------------------------

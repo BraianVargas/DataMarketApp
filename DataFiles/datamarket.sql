@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-10-2022 a las 04:26:40
+-- Tiempo de generación: 30-10-2022 a las 04:32:31
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 8.1.10
 
@@ -137,6 +137,30 @@ CREATE TABLE `profileanswer` (
   `additionalComents` text DEFAULT NULL,
   `sysActive` tinyint(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `profileanswer`
+--
+
+INSERT INTO `profileanswer` (`id`, `answerName`, `answerGroup`, `answerGroupDisplay`, `answerDescription`, `answerType`, `answerOptionId`, `additionalComents`, `sysActive`) VALUES
+(1, 'user entry string', 'user entry', 'null', 'please enter your answer', 'user entry string', 1, '', 1),
+(2, 'user entry integer', 'user entry', 'null', 'please enter your answer - must contain number without letters or special characters', 'user entry integer', 2, '', 1),
+(3, 'user entry date', 'user entry', 'dd/mm/yyyy', 'please enter your date of birth -format must by dd/mm/yyyy', 'user entry date', 3, '', 1),
+(4, 'multiple choice -yes', 'multiple choice bool', 'Yes', 'yes, if you do', 'multiple choice', 4, '', 1),
+(5, 'multiple choice -no', 'multiple choice bool', 'No', 'No, if you do not', 'multiple choice', 4, '', 1),
+(6, 'multiple choice -Male', 'multiple choice bool', 'MALE', 'MALE', 'multiple choice', 5, '', 1),
+(7, 'multiple choice -Female', 'multiple choice bool', 'FEMALE', 'FEMALE', 'multiple choice', 5, '', 1),
+(8, 'multiple choice -NON BINARY', 'multiple choice bool', 'NON-BINARY', 'NON-BINARY', 'multiple choice', 5, '', 1),
+(9, 'Full time work', 'multiple choice multiple', 'Full time work', 'work 8 hours or more', 'multiple choice', 6, '', 1),
+(10, 'Part time work', 'multiple choice bool', 'Part time or casual work', 'less than 8 hours daily', 'multiple choice', 6, '', 1),
+(11, 'Casual, seasonal or temporary work', 'multiple choice bool', 'Casual, seasonal or temporary work', 'Casual work or seasonal', 'multiple choice', 6, '', 1),
+(12, 'Full time student', 'multiple choice bool', 'Full time student', 'unemployed full time student', 'multiple choice', 6, '', 1),
+(14, 'Part time student', 'multiple choice bool', 'Part time student', 'Part time student', 'multiple choice', 6, '', 1),
+(15, 'Domestic home duties', 'multiple choice bool', 'Domestic home duties', NULL, 'multiple choice', 6, '', 1),
+(16, 'Retired', 'multiple choice bool', 'Retired', NULL, 'multiple choice', 6, '', 1),
+(17, 'Unemployed', 'multiple choice bool', 'Unemployed', NULL, 'multiple choice', 6, '', 1),
+(18, 'Other (please describe below)', 'multiple choice bool', 'Other (please describe below)', NULL, 'multiple choice', 6, '', 1),
+(19, 'Accept term and conditions', 'multiple choice bool', 'I have read, and agree to the Terms of service', NULL, 'multiple choice', 7, '', 1);
 
 -- --------------------------------------------------------
 
@@ -351,7 +375,7 @@ ALTER TABLE `profile`
 -- AUTO_INCREMENT de la tabla `profileanswer`
 --
 ALTER TABLE `profileanswer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `profilequestion`
