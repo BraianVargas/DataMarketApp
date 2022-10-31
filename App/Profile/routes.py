@@ -6,6 +6,10 @@ from Commons.db import getDB
 from .controller import *
 
 # ----------------------------- BUSQUEDAS Y FILTROS --------------------------------------
+"""
+It gets all the users from the database and returns them.
+:return: A list of tuples.
+""" 
 @profileBP.route('/get/all', methods=["GET","POST"])
 # @login_required
 def getUsers():
@@ -35,23 +39,30 @@ def createProfile():
     return message
 
 # ----------------------------- VERIFICACIÓN DE USUARIO --------------------------------------
+# se hace uso de la tabla 'profileUserDetail' como 'Fact Table'  
+# la cual va a guardar los id de las operaciónes de las questions y answers 
+# que se encuentran en las tablas 'questionSurvey' y 'answerSurvey'
+
 @profileBP.route('/verification', methods=['GET','POST'])
 # @login_required
 def verifiationOfUser():
-    # se hace uso de la tabla 'profileUserDetail' como 'Fact Table'  
-    # la cual va a guardar los id de las operaciónes de las questions y answers 
-    # que se encuentran en las tablas 'questionSurvey' y 'answerSurvey'
-    
     db, c = getDB()
     if request.method == 'GET':
-        query = c.execute("SELECT * FROM profileQuestion")
+        c.execute("SELECT * FROM profileQuestion")
         questions = c.fetchall()
         return questions
     else:
-        return None
+        query = request.get_json()
+        if isinstance(query, list):
+            i = 0
+            answer = query[i]['answer']
+            for i in range(len(query)):
+                print(f"************ ANSWER {answer} ************* ")
 
+                # q = c.execute("SELECT * FROM profileanswer ORDER BY id DESC LIMIT 1")
+        return answer
 
+        
 @profileBP.route('/')
 def indexUsers():
     return "INDEX PROFILE"
-
