@@ -35,7 +35,6 @@ def createNewProfile(offerDict):
         return F"FATAL ERROR. {e}"
 
 
-
 def get_users(userDict):
     db, c = getDB()
     filtered=[]
@@ -59,8 +58,31 @@ def get_users(userDict):
 
 
 # ----------------------------- USER VERIFICATION --------------------------------------
-
-def userVerification():
+def userVerification(cantOfAnswers, userId):
     db, c = getDB()
-    questions = []
-    query = "SELECT * FROM "
+    verified = 0
+
+    c.execute(f"SELECT * FROM profileuserdetail WHERE 'userId' = {userId}")
+    c.fetchall()
+    completes = c.rowcount
+
+    c.execute("SELECT * FROM profilequestion")
+    c.fetchall()
+    cantOfQuestions = c.rowcount
+
+
+
+    porcentComplete = (completes * 100)/cantOfQuestions
+    print(f"porcentaje completado {porcentComplete}")
+
+
+    porcentRemaining = (cantOfAnswers * 100)/cantOfQuestions
+    print(f"porcentaje faltante {porcentRemaining}")
+    
+    if (porcentComplete + porcentRemaining) == 100:
+        verified = 1
+        c.execute(f"UPDATE `profile` SET `isVerified`='{verified}' WHERE `id` = '{userId}'")
+        db.commit()
+    
+    return 200
+    # UPDATE `profile` SET `isVerified`='[value-13]' WHERE `id` = '[value-13]'
