@@ -62,15 +62,18 @@ def userVerification(cantOfAnswers, userId):
     db, c = getDB()
     verified = 0
 
-    c.execute(f"SELECT * FROM profileuserdetail WHERE 'userId' = {userId}")
+    c.execute(f"SELECT * FROM profileuserdetail WHERE userId={userId}")
     c.fetchall()
+
     completes = c.rowcount
+    print(f"############### QUERY \n {completes} \n##############")
 
     c.execute("SELECT * FROM profilequestion")
     c.fetchall()
     cantOfQuestions = c.rowcount
 
-
+    # COQ -> 100%
+    # COA -> x => x=((COA*100)/COQ) => It is the  porcent of questions answered
 
     porcentComplete = (completes * 100)/cantOfQuestions
     print(f"porcentaje completado {porcentComplete}")
@@ -79,6 +82,15 @@ def userVerification(cantOfAnswers, userId):
     porcentRemaining = (cantOfAnswers * 100)/cantOfQuestions
     print(f"porcentaje faltante {porcentRemaining}")
     
+    total = porcentComplete + porcentRemaining
+    print(f"porcentaje total {total}")
+
+    if int(total) == 100:
+        print(f"VERIFICADAZO")
+
+    if completes == cantOfQuestions:
+        print(f"VERIFICADAZO")
+
     if (porcentComplete + porcentRemaining) == 100:
         verified = 1
         c.execute(f"UPDATE `profile` SET `isVerified`='{verified}' WHERE `id` = '{userId}'")
