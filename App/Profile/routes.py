@@ -91,6 +91,9 @@ def verifiationOfUser():
                 except Exception as e:
                     return f"ERROR. {e}"
                 i+=1
+
+        userVerification(len(query), query[0]["userId"])
+
         return "200"
 
         
