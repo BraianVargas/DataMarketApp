@@ -80,19 +80,10 @@ def verifiationOfUser():
                     print(message)
                 except Exception as e:
                     return f"ERROR. {e}"
-                
-                uId = query[i]['userId']
-                qId = query[i]['questionId']
-                aId = answer['id']
-                
-                try:
-                    c.execute(f"INSERT INTO `profileuserdetail`(`questionId`, `answerId`, `userId`) VALUES ('{qId}','{aId}','{uId}')")
-                    db.commit()
-                except Exception as e:
-                    return f"ERROR. {e}"
+               
                 i+=1
 
-        userVerification(len(query), query[0]["userId"])
+        userVerification(query, query[-1]["userId"])
 
         return "200"
 
