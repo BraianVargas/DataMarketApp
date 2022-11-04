@@ -24,16 +24,10 @@ app.register_blueprint(questionsBP, url_prefix = '/questons')
 from App.Profile.Surveys.Answers import answersBP
 app.register_blueprint(answersBP, url_prefix = '/answers')
 
+
 @app.route('/indexes')
 def getUsers():
-    db, c = getDB()
-    c.execute("SELECT * FROM profile ORDER BY id ASC")
-    users = c.fetchall()
-
-    if users != None:
-        return users
-    else:
-        return "404 - User Table Is Empty"
+    return "API OK"
 
 # ----------------------------- GENERA EL ADMINISTRADOR DE LOGIN --------------------------------------
 login_manager = LoginManager(app)
