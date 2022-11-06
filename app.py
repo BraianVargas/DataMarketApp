@@ -25,7 +25,9 @@ from App.Profile.Surveys.Answers import answersBP
 app.register_blueprint(answersBP, url_prefix = '/answers')
 
 
-
+@app.route('/indexes')
+def getUsers():
+    return "API OK"
 
 # ----------------------------- GENERA EL ADMINISTRADOR DE LOGIN --------------------------------------
 login_manager = LoginManager(app)
