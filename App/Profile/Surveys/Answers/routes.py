@@ -11,6 +11,14 @@ def newQuestion():
     data=request.get_json()
     return createNewAnswer(data)
 
+@answersBP.route('/get', methods=['GET', 'POST'])
+def getanswers():
+    db, c = getDB()
+    q = "SELECT * FROM profileanswer"
+    c.execute(q)
+    a = c.fetchall()
+    return a
+
 
 
 @answersBP.route('/')

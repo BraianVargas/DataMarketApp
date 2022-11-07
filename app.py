@@ -1,8 +1,10 @@
 from flask import (
     Flask, request, g
     )
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
+cors = CORS(app)
 app.config.from_pyfile("DataFiles/config.py")
 
 from Commons.schema import *

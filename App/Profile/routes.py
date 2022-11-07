@@ -3,6 +3,8 @@ from flask_login import login_required, current_user,login_user,logout_user
 from App.Profile import profileBP
 from Commons.db import getDB
 
+from flask_cors import CORS, cross_origin
+
 from .controller import *
 from .Surveys.Answers import controller as answerController
 
@@ -10,7 +12,7 @@ from .Surveys.Answers import controller as answerController
 """
 It gets all the users from the database and returns them.
 :return: A list of tuples.
-""" 
+"""
 @profileBP.route('/get/all', methods=["GET","POST"])
 # @login_required
 def getUsers():
@@ -31,7 +33,7 @@ def searchUser():
     return i
 
 @profileBP.route('/new', methods = ["POST"])
-# @login_required 
+# @login_required
 def createProfile():
     data = request.get_json()
 
@@ -60,6 +62,7 @@ def createProfile():
     """
 @profileBP.route('/verification', methods=['GET','POST'])
 # @login_required
+@cross_origin()
 def verifiationOfUser():
     db, c = getDB()
     if request.method == 'GET':
@@ -80,14 +83,14 @@ def verifiationOfUser():
                     print(message)
                 except Exception as e:
                     return f"ERROR. {e}"
-               
+
                 i+=1
 
         userVerification(query, query[-1]["userId"])
 
         return "200"
 
-        
+
 
 
 
