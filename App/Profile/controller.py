@@ -1,4 +1,5 @@
 from Commons.db import getDB
+import time
 
 def createNewProfile(offerDict):
     db,c = getDB()
@@ -58,43 +59,54 @@ def get_users(userDict):
 
 
 # ----------------------------- USER VERIFICATION --------------------------------------
-def userVerification(cantOfAnswers, userId):
+    """
+    It takes a list of answers and a userId, then it checks if the user has answered all the questions,
+    if so, it updates the user's profile to verified
+    
+    :param answers: [{'questionId': 1, 'answer': {'id': 1, 'answer': 'Yes'}, 'userId': 1},
+    {'questionId': 2, 'answer': {'id': 2, 'answer': 'No'}, 'userId': 1}, {
+    :param userId: The user's ID
+    :return: A list of questions
+    """
+def userVerification(answers, userId):
     db, c = getDB()
     verified = 0
+    c.execute(f"SELECT questionId FROM profileuserdetail WHERE userId={userId}")
+    questionsIds = c.fetchall()
+    listOfId = []
+    i = 0
+    while(i<len(questionsIds)):
+        listOfId.append(questionsIds[i]["questionId"])
+        i+=1
+    i=0 
+    while(i<len(answers)):
+        if(answers[i]["questionId"] in listOfId):
+            i+=1
+            print("no se agregó elemento")
+        else:
+            uId = answers[i]['userId']
+            qId = answers[i]['questionId']
+            aId = answers[i]['answer']['id']
 
-    c.execute(f"SELECT * FROM profileuserdetail WHERE userId={userId}")
-    c.fetchall()
+            c.execute(f"INSERT INTO `profileuserdetail`(`questionId`, `answerId`, `userId`) VALUES ('{qId}','{aId}','{uId}')")
+            db.commit()
+            
+            listOfId.append(qId)
+            i+=1
 
-    completes = c.rowcount
-    print(f"############### QUERY \n {completes} \n##############")
+    c.execute("SELECT id FROM profilequestion")
+    questionsIds = c.fetchall()
 
-    c.execute("SELECT * FROM profilequestion")
-    c.fetchall()
-    cantOfQuestions = c.rowcount
+    listOfId2 = []
+    i=0
+    while(i<len(questionsIds)):
+        listOfId2.append(questionsIds[i]["id"])
+        i+=1
 
-    # COQ -> 100%
-    # COA -> x => x=((COA*100)/COQ) => It is the  porcent of questions answered
-
-    porcentComplete = (completes * 100)/cantOfQuestions
-    print(f"porcentaje completado {porcentComplete}")
-
-
-    porcentRemaining = (cantOfAnswers * 100)/cantOfQuestions
-    print(f"porcentaje faltante {porcentRemaining}")
-    
-    total = porcentComplete + porcentRemaining
-    print(f"porcentaje total {total}")
-
-    if int(total) == 100:
-        print(f"VERIFICADAZO")
-
-    if completes == cantOfQuestions:
-        print(f"VERIFICADAZO")
-
-    if (porcentComplete + porcentRemaining) == 100:
+    if len(listOfId) == len(listOfId2):
         verified = 1
         c.execute(f"UPDATE `profile` SET `isVerified`='{verified}' WHERE `id` = '{userId}'")
         db.commit()
+        print("Profile Verified")
     
     return 200
-    # UPDATE `profile` SET `isVerified`='[value-13]' WHERE `id` = '[value-13]'
