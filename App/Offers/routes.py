@@ -29,20 +29,26 @@ def getOf():
     return i
 
 # ---------------------- POST routes ----------------------
-@offersBP.route('/crearOferta', methods=['POST'])
+@offersBP.route('/create', methods=['POST'])
 def crear():
     data = (request.get_json())
     statMessage = create_new_offer(data)
-    print(statMessage)
     return statMessage
 
-@offersBP.route('/deleteOffers/<id>', methods=['POST'])
+@offersBP.route('/delete/<id>', methods=['POST'])
 def delete(id):
     statMessage = deleteOffers(id)
     return statMessage
 
-@offersBP.route('/update/<id>', methods=['POST'])
-def update(id):
-    data = (request.get_json())
-    statMessage = updateOffers(data,id)
-    return statMessage
+@offersBP.route('/update', methods=['PUT', 'GET'])
+def update():
+    id = request.args.get('id')
+    try:
+        print(id)
+        offer = getOfferById(int(id))
+        return offer
+        
+    except Exception as e:
+        print(e)
+        return F"FATAL ERROR. {e}"
+    # statMessage = updateOffers(int(id))

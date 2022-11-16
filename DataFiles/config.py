@@ -1,5 +1,5 @@
 DATABASE_HOST = 'localhost'
-DATABASE_USER = 'user'
+DATABASE_USER = 'root'
 DATABASE_PASSWORD = ''
 FLASK_DEBUG=True
 DATABASE = 'datamarket'

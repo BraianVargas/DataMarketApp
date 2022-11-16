@@ -3,9 +3,9 @@ from Commons.db import getDB
 
 def getOfferByIds(id):
     i = 0 
-    c = getDB()
+    db, c = getDB()
     
-    c.execute('SELECT * FROM offers WHERE offerId = %s', (id,))
+    c.execute(f'SELECT * FROM offers WHERE id = %s', (id,))
     offer = c.fetchone()
     if offer!=None:
         return offer
@@ -34,7 +34,7 @@ def get_offers(offerDict):
     except Exception as e:
         return f"Fatal Error. {e}"   
 
- 
+
 def create_new_offer(offerDict):
     db,c=getDB()
     # Crea la query por medio de las KEY y las values ingresadas
@@ -93,7 +93,7 @@ def updateOffers(offers,id):
         
     print(type(q))
     print(q)
-    q += " WHERE id=4"
+    q += " WHERE id={id}"
     # for key in keys:
     #     if key == keys[-1]:
     #         q += f"{key}"
