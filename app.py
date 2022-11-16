@@ -20,12 +20,15 @@ app.register_blueprint(profileBP, url_prefix = '/profile')
 from App.Profile.Surveys.Questions import questionsBP
 app.register_blueprint(questionsBP, url_prefix = '/questons')
 
-
 from App.Profile.Surveys.Answers import answersBP
 app.register_blueprint(answersBP, url_prefix = '/answers')
 
+from App.Offers import offersBP
+app.register_blueprint(offersBP, url_prefix = '/offers')
 
-
+@app.route('/indexes')
+def getUsers():
+    return "API OK"
 
 # ----------------------------- GENERA EL ADMINISTRADOR DE LOGIN --------------------------------------
 login_manager = LoginManager(app)

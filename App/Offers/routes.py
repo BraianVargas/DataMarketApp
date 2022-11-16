@@ -1,6 +1,9 @@
-
+from Commons.db import getDB
+from flask import request
+from . import offersBP
+from .controller import *
 # ---------------------- GET routes ----------------------
-@app.route("/getOffers")
+@offersBP.route("/getOffers", methods=['GET'])
 def getAll():
     db, c = getDB()
     c.execute("SELECT * FROM offers ORDER BY id ASC ")
@@ -10,13 +13,13 @@ def getAll():
     else:
         return "404 - Offer Not Found"
     
-@app.route('/filter/offerId/<offerId>')
+@offersBP.route('/filter/offerId/<offerId>')
 def getOfferById(offerId):
     i = getOfferByIds(offerId)
     return i
 
 
-@app.route('/search/', methods=['GET','POST'])
+@offersBP.route('/search', methods=['GET','POST'])
 def getOf():
     #Se recibe el argumento como KEY
     OfferTitle = request.args.get('offer')
@@ -26,9 +29,20 @@ def getOf():
     return i
 
 # ---------------------- POST routes ----------------------
-@app.route('/crearOferta', methods=['POST'])
+@offersBP.route('/crearOferta', methods=['POST'])
 def crear():
     data = (request.get_json())
     statMessage = create_new_offer(data)
     print(statMessage)
+    return statMessage
+
+@offersBP.route('/deleteOffers/<id>', methods=['POST'])
+def delete(id):
+    statMessage = deleteOffers(id)
+    return statMessage
+
+@offersBP.route('/update/<id>', methods=['POST'])
+def update(id):
+    data = (request.get_json())
+    statMessage = updateOffers(data,id)
     return statMessage
