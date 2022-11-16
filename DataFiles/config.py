@@ -1,6 +1,7 @@
 DATABASE_HOST = 'localhost'
 DATABASE_USER = 'user'
 DATABASE_PASSWORD = ''
+FLASK_DEBUG=True
 DATABASE = 'datamarket'
 SECRET_KEY = "GDtfDCFYjDhhGGHVsDAgSewKisaksd"
 TRACK_MODIFICATIONS = False

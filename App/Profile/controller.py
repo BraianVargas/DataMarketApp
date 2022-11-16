@@ -1,4 +1,5 @@
 from Commons.db import getDB
+import time
 
 def createNewProfile(offerDict):
     db,c = getDB()
@@ -35,7 +36,6 @@ def createNewProfile(offerDict):
         return F"FATAL ERROR. {e}"
 
 
-
 def get_users(userDict):
     db, c = getDB()
     filtered=[]
@@ -59,8 +59,54 @@ def get_users(userDict):
 
 
 # ----------------------------- USER VERIFICATION --------------------------------------
-
-def userVerification():
+    """
+    It takes a list of answers and a userId, then it checks if the user has answered all the questions,
+    if so, it updates the user's profile to verified
+    
+    :param answers: [{'questionId': 1, 'answer': {'id': 1, 'answer': 'Yes'}, 'userId': 1},
+    {'questionId': 2, 'answer': {'id': 2, 'answer': 'No'}, 'userId': 1}, {
+    :param userId: The user's ID
+    :return: A list of questions
+    """
+def userVerification(answers, userId):
     db, c = getDB()
-    questions = []
-    query = "SELECT * FROM "
+    verified = 0
+    c.execute(f"SELECT questionId FROM profileuserdetail WHERE userId={userId}")
+    questionsIds = c.fetchall()
+    listOfId = []
+    i = 0
+    while(i<len(questionsIds)):
+        listOfId.append(questionsIds[i]["questionId"])
+        i+=1
+    i=0 
+    while(i<len(answers)):
+        if(answers[i]["questionId"] in listOfId):
+            i+=1
+            print("no se agregó elemento")
+        else:
+            uId = answers[i]['userId']
+            qId = answers[i]['questionId']
+            aId = answers[i]['answer']['id']
+
+            c.execute(f"INSERT INTO `profileuserdetail`(`questionId`, `answerId`, `userId`) VALUES ('{qId}','{aId}','{uId}')")
+            db.commit()
+            
+            listOfId.append(qId)
+            i+=1
+
+    c.execute("SELECT id FROM profilequestion")
+    questionsIds = c.fetchall()
+
+    listOfId2 = []
+    i=0
+    while(i<len(questionsIds)):
+        listOfId2.append(questionsIds[i]["id"])
+        i+=1
+
+    if len(listOfId) == len(listOfId2):
+        verified = 1
+        c.execute(f"UPDATE `profile` SET `isVerified`='{verified}' WHERE `id` = '{userId}'")
+        db.commit()
+        print("Profile Verified")
+    
+    return 200
