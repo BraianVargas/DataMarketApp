@@ -1,5 +1,5 @@
 from Commons.db import getDB
-from flask import request
+from flask import request, session
 from . import offersBP
 from .controller import *
 # ---------------------- GET routes ----------------------
@@ -42,13 +42,10 @@ def delete(id):
 
 @offersBP.route('/update', methods=['PUT', 'GET'])
 def update():
-    id = request.args.get('id')
-    try:
-        print(id)
-        offer = getOfferById(int(id))
-        return offer
-        
-    except Exception as e:
-        print(e)
-        return F"FATAL ERROR. {e}"
-    # statMessage = updateOffers(int(id))
+    data = request.args.get('id')
+    if request.method=='GET':
+        if "username" in session and "role" in session:
+            return data
+    else:
+        statMessage = updateOffers(data,int(id))
+        return statMessage

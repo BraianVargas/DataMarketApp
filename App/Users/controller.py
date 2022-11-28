@@ -1,9 +1,10 @@
 from Commons.db import getDB
+import hashlib
 
 def createNewUser(offerDict):
     db,c = getDB()
 
-    q = "INSERT INTO profile "
+    q = "INSERT INTO users "
     keys = []
     values = []    
     for key,value in offerDict.items():
@@ -34,11 +35,35 @@ def createNewUser(offerDict):
         print(e)
         return F"FATAL ERROR. {e}"
 
+def getUserFromLogin(uname, inputPassword):
+    db, c = getDB()
+    c.execute(f'SELECT * FROM `users` WHERE `username` = %s',(uname,))
+    userSelected = c.fetchone()
+    
+    try:
+        if userSelected['username'] == uname: ## ELIMINAR, VERIFICACION INNECESARIA
+            try:
+                if userSelected['password'].hexdigest() == inputPassword:
+                    return userSelected
+                else:
+                    return "Error. User or password not match."    
+            except Exception as e:
+                return f"Error in Password: {e}"
+        else:
+            return "Error. User or password not match."
+    except Exception as e:
+        return f"Error in username: {e}"
+
+def getAllUsers():
+    db, c = getDB()
+    c.execute("SELECT * FROM users ORDER BY id ASC")
+    users = c.fetchall()
+    return users
 
 def get_users(userDict):
     db, c = getDB()
     filtered=[]
-    query = "SELECT * FROM profile WHERE "
+    query = "SELECT * FROM users WHERE "
     flag = 0 # Bandera de posicion inicial
     try:
         for key,value in userDict.items():

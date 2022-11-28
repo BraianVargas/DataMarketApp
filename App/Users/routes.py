@@ -2,13 +2,11 @@ from flask import request,redirect,url_for
 from flask_login import login_required, current_user,login_user,logout_user
 from Commons.db import getDB
 
+from .models import User, get_user
+
 from .controller import *
 from . import usersBP
-from .models import User,users, get_user
-
-#Esto solo es necesario para las pruebas
-usuario=User(1, "Matias", "pepito@gmail.com", "lala1234")
-users.append(usuario)
+import time
 
 #Login
 @usersBP.route('/login', methods=['GET', 'POST'])
@@ -18,19 +16,24 @@ def login():
         return "ya inicioo sesion"
     
     #Si no esta logeado toma los datos del formulario
-    user = request.args.get('user')
+    username = request.args.get('username')
     password = request.args.get('password')
     remember_me = request.args.get('remember')
+    
     #Esto simula la busqueda en la base de datos
-    user = get_user(user)
-    #Comprueba si el usuario existe y la contraseña es la misma
-    if user is not None and user.check_password(password):
-        #Loguea al usuario si todo funciono
-        login_user(user, remember=remember_me)
-        return "Se pudo loguear"
-    #Avisa en caso de que no se pudiera loguear correctamente
-    return "La contraseña o usuario estan mal"
+    user = getUserFromLogin(username, password)
 
+    print(f"jlkjfljdldfs {user}")
+
+    try:
+        #Comprueba si el usuario existe y la contraseña es la misma
+        if (user != None) and (user.check_password(user.password)):
+            #Loguea al usuario si todo funciono
+            login_user(user, remember=remember_me)
+            return "Se pudo loguear"
+    except Exception as e:
+        #Avisa en caso de que no se pudiera loguear correctamente
+        return f"User or password wrong. Error.{e}"
 
 #Desloguea al usuario
 @usersBP.route('/logout')
@@ -53,10 +56,7 @@ def registerUser():
 @usersBP.route('/getusers', methods=["GET","POST"])
 # @login_required
 def getUsers():
-    db, c = getDB()
-    c.execute("SELECT * FROM profile ORDER BY id ASC")
-    users = c.fetchall()
-
+    users = getAllUsers()
     if users != None:
         return users
     else:
@@ -101,3 +101,15 @@ def verifiationOfUser():
 def indexUsers():
     return "INDEX USER"
 
+
+
+@usersBP.route('/login-user', methods=['POST'])
+def logIn():
+    db, c = getDB()
+    if request.method == "POST":
+        userData = request.get_json()
+
+        user = getUserFromLogin(userData['username'], userData['password'])
+        return user
+    else:
+        return "NO"

@@ -2,13 +2,15 @@ from flask import (
     Flask, request, g
     )
 
+import flask_login
+
 app = Flask(__name__)
 app.config.from_pyfile("DataFiles/config.py")
 
 from Commons.schema import *
 from Commons.db import getDB
 from flask_login import LoginManager
-from App.Users.models import users
+from App.Users.controller import *
 
 # ----------------------------- IMPORTA Y REGISTRA LOS BLUEPRINTS --------------------------------------
 from App.Users import usersBP
@@ -26,16 +28,14 @@ app.register_blueprint(answersBP, url_prefix = '/answers')
 from App.Offers import offersBP
 app.register_blueprint(offersBP, url_prefix = '/offers')
 
-@app.route('/indexes')
-def getUsers():
-    return "API OK"
 
 # ----------------------------- GENERA EL ADMINISTRADOR DE LOGIN --------------------------------------
 login_manager = LoginManager(app)
 @login_manager.user_loader
 def load_user(user_id):
+    users = getAllUsers()
     for user in users:
-        if user.id == int(user_id):
+        if user['id'] == int(user_id):
             return user
     return None
 
