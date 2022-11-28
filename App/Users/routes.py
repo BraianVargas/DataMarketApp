@@ -1,3 +1,4 @@
+import datetime
 from flask import request,redirect,url_for
 from flask_login import login_required, current_user,login_user,logout_user
 from Commons.db import getDB
@@ -12,24 +13,28 @@ import time
 @usersBP.route('/login', methods=['GET', 'POST'])
 def login():
     #Autentica si el usuario esta logeado
+
+    # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    # AGREGAR CONTROL DE ERRORES TRY - EXCEPT
+    # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
     if current_user.is_authenticated:
-        return "ya inicioo sesion"
+        return "Is already logged in."
     
     #Si no esta logeado toma los datos del formulario
     username = request.args.get('username')
     password = request.args.get('password')
     remember_me = request.args.get('remember')
     
-    #Esto simula la busqueda en la base de datos
+    #Esto realiza la busqueda en la base de datos
     user = getUserFromLogin(username, password)
-
-    print(f"jlkjfljdldfs {user}")
-
+    print((user))
+    print(isinstance(user,User))
     try:
         #Comprueba si el usuario existe y la contraseña es la misma
-        if (user != None) and (user.check_password(user.password)):
-            #Loguea al usuario si todo funciono
-            login_user(user, remember=remember_me)
+        if ((user!=None) and (isinstance(user,User))):
+            login_user(user, remember = remember_me, duration = datetime.timedelta(days = 7))
+            print("Päso logeo")
             return "Se pudo loguear"
     except Exception as e:
         #Avisa en caso de que no se pudiera loguear correctamente

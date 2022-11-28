@@ -1,4 +1,5 @@
 from Commons.db import getDB
+from App.Users.models import User
 import hashlib
 
 def createNewUser(offerDict):
@@ -37,20 +38,25 @@ def createNewUser(offerDict):
 
 def getUserFromLogin(uname, inputPassword):
     db, c = getDB()
-    c.execute(f'SELECT * FROM `users` WHERE `username` = %s',(uname,))
-    userSelected = c.fetchone()
-    
     try:
-        if userSelected['username'] == uname: ## ELIMINAR, VERIFICACION INNECESARIA
+        c.execute(f"SELECT * FROM users WHERE username = %s",(uname,))
+        userSelected = c.fetchone()
+
+        if userSelected != None:
             try:
-                if userSelected['password'].hexdigest() == inputPassword:
-                    return userSelected
+                if userSelected['password'] == (hashlib.sha512(inputPassword.encode())).hexdigest():
+                    try:
+                        user = None
+                        user = (userSelected['id'], userSelected['username'], userSelected['role'], userSelected['password'])
+                        return user
+                    except Exception as e:
+                        return f"User error: {e}"
                 else:
                     return "Error. User or password not match."    
             except Exception as e:
                 return f"Error in Password: {e}"
         else:
-            return "Error. User or password not match."
+            return "Error. User not found."
     except Exception as e:
         return f"Error in username: {e}"
 

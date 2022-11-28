@@ -1,6 +1,6 @@
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
-from .controller import *
+from App.Users.controller import *
 
 class User(UserMixin):
     def __init__(self, id, username, role, password, is_admin=False):
@@ -8,6 +8,7 @@ class User(UserMixin):
         self.username = username
         self.role = role
         self.password = generate_password_hash(password)
+        self.is_active=True
         self.is_admin = is_admin
         
     def set_password(self, password):
