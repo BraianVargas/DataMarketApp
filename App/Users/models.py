@@ -14,7 +14,7 @@ class User(UserMixin):
     def check_password(self, password):
         return check_password_hash(self.password, password)
     def __repr__(self):
-        return '<User {}>'.format(self.email)
+        return '<User {}>'.format(self.username)
     
     def get_id(self):
         print(f"ID DEL SUPER USUARIO {super().get_id()}")

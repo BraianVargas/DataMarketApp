@@ -1,5 +1,5 @@
 from Commons.db import getDB
-from flask import request, session
+from flask import *
 from . import offersBP
 from .controller import *
 import time
@@ -7,6 +7,7 @@ import time
 from flask_login import *
 # ---------------------- GET routes ----------------------
 @offersBP.route("/getOffers", methods=['GET'])
+@login_required
 def getAll():
     db, c = getDB()
     c.execute("SELECT * FROM offers ORDER BY id ASC ")
@@ -39,20 +40,28 @@ def crear():
     return statMessage
 
 @offersBP.route('/delete/<id>', methods=['POST'])
+@login_required
 def delete(id):
     statMessage = deleteOffers(id)
     return statMessage
 
-@offersBP.route('/update', methods=['PUT', 'GET'])
+@offersBP.route('/update')
 @login_required
 def update():
-    offerId = request.args.get('id')
-    if request.method=='GET':
-        if current_user.is_authenticated:
-            offerDict = dict(id = offerId, idCreator = current_user.get_id())
-            print(offerDict)
-            time.sleep(20000)
-            get_offers()
+    if request.method == 'GET':
+        try:
+            offerId = request.args.get('id')
+            print(f"current user {current_user}")            
+            print(f"logeed {current_user.is_authenticated}")            
+            if current_user.is_authenticated:
+                data = get_offers(offerDict = dict(id = offerId, idCreator = current_user.get_id()))
+                print(f"DATA OFFERS {data}")
+                return data
+            else:
+                return "23"
+        except Exception as e:
+            return f"Update error. {e}"
     else:
+        print("2")
         statMessage = updateOffers(data,int(id))
         return statMessage

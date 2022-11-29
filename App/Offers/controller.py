@@ -12,7 +12,7 @@ def getOfferByIds(id):
     else:
         return "404 - Offer Not Found"
 
-def get_offers(offerDict):
+def get_offers(offerDict, limit = 10):
     db, c = getDB()
     filtered=[]
     #Se buscan todas las coincidencias de offerTitle
@@ -25,6 +25,7 @@ def get_offers(offerDict):
                 flag += 1
             else:
                 query += f" || {key} LIKE '%{value}%' " 
+            query += f" LIMIT '{limit}" 
         c.execute(query)
         filtered = c.fetchall()
         if filtered != None:

@@ -19,6 +19,7 @@ def load_user(user_id):
     for user in users:
         if user['id'] == int(user_id):
             user = User(user['id'], user['username'], user['role'], user['password'])
+            print(f"User from login manager {user}")
             return user
     return None
 
