@@ -93,24 +93,24 @@ def updateOffers(offers,id):
         
     print(type(q))
     print(q)
-    q += " WHERE id={id}"
-    # for key in keys:
-    #     if key == keys[-1]:
-    #         q += f"{key}"
-    #     else:
-    #         q += f"{key},"
-    # q += ")"
-    # q += " VALUES"
-    # q += "("
-    # for value in values:
-    #     if value == values[-1]:
-    #         q += f"'{value}'"
-    #     elif type(value) == int or type(value) == float:
-    #         q += f"{value},"
-    #     else:
-    #         q += f"'{value}',"
-    # q += ")"
-    # #Carga los datos en la db
+    q += f"WHERE id={id}"
+    for key in keys:
+        if key == keys[-1]:
+            q += f"{key}"
+        else:
+            q += f"{key},"
+    q += ")"
+    q += " VALUES"
+    q += "("
+    for value in values:
+        if value == values[-1]:
+            q += f"'{value}'"
+        elif type(value) == int or type(value) == float:
+            q += f"{value},"
+        else:
+            q += f"'{value}',"
+    q += ")"
+    #Carga los datos en la db
     try:
         c.execute(q)
         db.commit()

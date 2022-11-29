@@ -83,10 +83,3 @@ def get_users(userDict):
             return "404 - User Not Match"
     except Exception as e:
         return f"Fatal Error. {e}"
-
-# ----------------------------- USER VERIFICATION --------------------------------------
-
-def userVerification():
-    db, c = getDB()
-    questions = []
-    query = "SELECT * FROM "

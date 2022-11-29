@@ -2,16 +2,14 @@ from flask import (
     Flask, request, g
     )
 
-import flask_login
 
 app = Flask(__name__)
 app.config.from_pyfile("DataFiles/config.py")
 
 from Commons.schema import *
 from Commons.db import getDB
-from flask_login import LoginManager
+from flask_login import *
 from App.Users.controller import *
-
 
 # ----------------------------- GENERA EL ADMINISTRADOR DE LOGIN --------------------------------------
 login_manager = LoginManager(app)
@@ -20,6 +18,7 @@ def load_user(user_id):
     users = getAllUsers()
     for user in users:
         if user['id'] == int(user_id):
+            user = User(user['id'], user['username'], user['role'], user['password'])
             return user
     return None
 

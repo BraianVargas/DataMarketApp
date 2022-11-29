@@ -2,6 +2,9 @@ from Commons.db import getDB
 from flask import request, session
 from . import offersBP
 from .controller import *
+import time
+
+from flask_login import *
 # ---------------------- GET routes ----------------------
 @offersBP.route("/getOffers", methods=['GET'])
 def getAll():
@@ -41,11 +44,15 @@ def delete(id):
     return statMessage
 
 @offersBP.route('/update', methods=['PUT', 'GET'])
+@login_required
 def update():
-    data = request.args.get('id')
+    offerId = request.args.get('id')
     if request.method=='GET':
-        if "username" in session and "role" in session:
-            return data
+        if current_user.is_authenticated:
+            offerDict = dict(id = offerId, idCreator = current_user.get_id())
+            print(offerDict)
+            time.sleep(20000)
+            get_offers()
     else:
         statMessage = updateOffers(data,int(id))
         return statMessage

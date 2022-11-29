@@ -14,25 +14,24 @@ import time
 def login():
     #Autentica si el usuario esta logeado
 
-    print(f"CURRENT USEr {current_user}")
     if current_user.is_authenticated:
         return "Is already logged in."
-    #Si no esta logeado toma los datos del formulario
-    username = request.args.get('username')
-    password = request.args.get('password')
-    remember_me = request.args.get('remember')
-    
-    try:
-        #Esto realiza la busqueda en la base de datos
-        user = getUserFromLogin(username, password)
-        print(type(user))
-        #Comprueba si el usuario existe y la contraseña es la misma
-        if ((user!=None) and (isinstance(user,User))):
-            login_user(user, remember = remember_me, duration = datetime.timedelta(days = 7))
-            return "Se pudo loguear"
-    except Exception as e:
-        #Avisa en caso de que no se pudiera loguear correctamente
-        return f"User or password wrong. Error.{e}"
+    else:
+        #Si no esta logeado toma los datos del formulario
+        username = request.args.get('username')
+        password = request.args.get('password')
+        remember_me = request.args.get('remember')
+        
+        try:
+            #Esto realiza la busqueda en la base de datos
+            user = getUserFromLogin(username, password)
+            #Comprueba si el usuario existe y la contraseña es la misma
+            if ((user!=None) and (isinstance(user,User))):
+                login_user(user, remember = remember_me, duration = datetime.timedelta(hours = 7))
+                return "Se pudo loguear"
+        except Exception as e:
+            #Avisa en caso de que no se pudiera loguear correctamente
+            return f"User or password wrong. Error.{e}"
 
 #Desloguea al usuario
 
@@ -54,7 +53,7 @@ def registerUser():
 # ----------------------------- BUSQUEDAS Y FILTROS --------------------------------------
 
 @usersBP.route('/getusers', methods=["GET","POST"])
-# @login_required
+@login_required
 def getUsers():
     users = getAllUsers()
     if users != None:
@@ -70,7 +69,7 @@ def searchUser():
     return i
 
 @usersBP.route('/new', methods = ["POST"])
-# @login_required 
+@login_required 
 def createUser():
     #
     # if is logged in as administrator
@@ -83,7 +82,7 @@ def createUser():
 
 # ----------------------------- VERIFICACIÓN DE USUARIO --------------------------------------
 @usersBP.route('/verification', methods=['GET','POST'])
-# @login_required
+@login_required
 def verifiationOfUser():
     # se hace uso de la tabla 'profileUserDetail' como 'Fact Table'  
     # la cual va a guardar los id de las operaciónes de las questions y answers 
@@ -98,5 +97,6 @@ def verifiationOfUser():
 
 
 @usersBP.route('/')
+@login_required
 def indexUsers():
     return "INDEX USER"

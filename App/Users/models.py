@@ -7,7 +7,6 @@ class User(UserMixin):
         self.username = username
         self.role = role
         self.password = generate_password_hash(password)
-        
         self.is_admin = is_admin
         
     def set_password(self, password):
@@ -16,4 +15,8 @@ class User(UserMixin):
         return check_password_hash(self.password, password)
     def __repr__(self):
         return '<User {}>'.format(self.email)
+    
+    def get_id(self):
+        print(f"ID DEL SUPER USUARIO {super().get_id()}")
+        return super().get_id()
 
