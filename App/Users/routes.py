@@ -3,7 +3,7 @@ from flask import request,redirect,url_for
 from flask_login import login_required, current_user,login_user,logout_user
 from Commons.db import getDB
 
-from .models import User, get_user
+from .models import User
 
 from .controller import *
 from . import usersBP
@@ -14,33 +14,28 @@ import time
 def login():
     #Autentica si el usuario esta logeado
 
-    # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    # AGREGAR CONTROL DE ERRORES TRY - EXCEPT
-    # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
+    print(f"CURRENT USEr {current_user}")
     if current_user.is_authenticated:
         return "Is already logged in."
-    
     #Si no esta logeado toma los datos del formulario
     username = request.args.get('username')
     password = request.args.get('password')
     remember_me = request.args.get('remember')
     
-    #Esto realiza la busqueda en la base de datos
-    user = getUserFromLogin(username, password)
-    print((user))
-    print(isinstance(user,User))
     try:
+        #Esto realiza la busqueda en la base de datos
+        user = getUserFromLogin(username, password)
+        print(type(user))
         #Comprueba si el usuario existe y la contraseña es la misma
         if ((user!=None) and (isinstance(user,User))):
             login_user(user, remember = remember_me, duration = datetime.timedelta(days = 7))
-            print("Päso logeo")
             return "Se pudo loguear"
     except Exception as e:
         #Avisa en caso de que no se pudiera loguear correctamente
         return f"User or password wrong. Error.{e}"
 
 #Desloguea al usuario
+
 @usersBP.route('/logout')
 @login_required
 def logout():
@@ -105,16 +100,3 @@ def verifiationOfUser():
 @usersBP.route('/')
 def indexUsers():
     return "INDEX USER"
-
-
-
-@usersBP.route('/login-user', methods=['POST'])
-def logIn():
-    db, c = getDB()
-    if request.method == "POST":
-        userData = request.get_json()
-
-        user = getUserFromLogin(userData['username'], userData['password'])
-        return user
-    else:
-        return "NO"

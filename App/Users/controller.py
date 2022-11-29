@@ -1,6 +1,6 @@
 from Commons.db import getDB
-from App.Users.models import User
 import hashlib
+from .models import User
 
 def createNewUser(offerDict):
     db,c = getDB()
@@ -41,14 +41,11 @@ def getUserFromLogin(uname, inputPassword):
     try:
         c.execute(f"SELECT * FROM users WHERE username = %s",(uname,))
         userSelected = c.fetchone()
-
         if userSelected != None:
             try:
                 if userSelected['password'] == (hashlib.sha512(inputPassword.encode())).hexdigest():
                     try:
-                        user = None
-                        user = (userSelected['id'], userSelected['username'], userSelected['role'], userSelected['password'])
-                        return user
+                        return User(userSelected['id'], userSelected['username'], userSelected['role'], userSelected['password'])
                     except Exception as e:
                         return f"User error: {e}"
                 else:
