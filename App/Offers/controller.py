@@ -90,7 +90,7 @@ def deleteOffers(offerId):
         print(e)
         return F"FATAL ERROR. {e}"
         
-def updateOffers(offers,id):
+def updateOffers(offers,id, idCreator):
     db,c=getDB()
     keys =[]
     values = []
@@ -103,7 +103,7 @@ def updateOffers(offers,id):
             q += f"`{key}`='{value}'"
         else:
             q += f"`{key}`='{value}', "
-    q += f" WHERE id={id}"
+    q += f" WHERE id={id} AND idCreator={idCreator}"
     try:
         c.execute(q)
         db.commit()

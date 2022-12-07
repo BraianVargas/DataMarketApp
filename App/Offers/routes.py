@@ -48,6 +48,7 @@ def delete(id):
 @offersBP.route('/update', methods=['GET','POST'])
 @login_required
 def update():
+    db,c=getDB()
     data = []
     if request.method == 'GET':
         try:
@@ -63,7 +64,8 @@ def update():
         if request.method == 'POST':
             offerId = request.args.get('id')
             data = request.get_json()
-            statMessage = updateOffers(data,int(offerId))
+
+            statMessage = updateOffers(data,int(offerId), current_user.get_id())
             return statMessage
         else:
             return "234"
