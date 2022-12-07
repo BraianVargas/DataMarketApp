@@ -45,9 +45,10 @@ def delete(id):
     statMessage = deleteOffers(id)
     return statMessage
 
-@offersBP.route('/update')
+@offersBP.route('/update', methods=['GET','POST'])
 @login_required
 def update():
+    data = []
     if request.method == 'GET':
         try:
             offerId = request.args.get('id')
@@ -55,13 +56,15 @@ def update():
             print(f"logeed {current_user.is_authenticated}")            
             if current_user.is_authenticated:
                 data = get_offers(offerDict = dict(id = offerId, idCreator = current_user.get_id()))
-                print(f"DATA OFFERS {data}")
                 return data
             else:
                 return "23"
         except Exception as e:
             return f"Update error. {e}"
     else:
-        print("2")
-        statMessage = updateOffers(data,int(id))
-        return statMessage
+        if request.method == 'POST':
+            offerId = request.args.get('id')
+            statMessage = updateOffers(data,int(offerId))
+            return statMessage
+        else:
+            return "234"
