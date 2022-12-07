@@ -82,37 +82,24 @@ def deleteOffers(offerId):
         
 def updateOffers(offers,id):
     db,c=getDB()
-    q = "UPDATE `offers` SET "
-    keys =[] 
+
+    keys =[]
     values = []
 
-    print(f"OFERTASSSSSSSSS: {offers}")
+    q = "UPDATE `offers` SET "
 
     for key,value in offers.items():
-        if key == 'appliedUsers':
-            q += f"{key}={value}"
-        else:
-            q += f"{key}={value},"
-        
-    print(type(q))
-    print(q)
-    q += f"WHERE id={id}"
-    for key in keys:
+        keys.append(key)
+        values.append(value)
+
+    for key,value in offers.items():
         if key == keys[-1]:
-            q += f"{key}"
+            q += f"`{key}`='{value}'"
         else:
-            q += f"{key},"
-    q += ")"
-    q += " VALUES"
-    q += "("
-    for value in values:
-        if value == values[-1]:
-            q += f"'{value}'"
-        elif type(value) == int or type(value) == float:
-            q += f"{value},"
-        else:
-            q += f"'{value}',"
-    q += ")"
+            q += f"`{key}`='{value}', "
+        
+    q += f" WHERE id={id}"
+
     #Carga los datos en la db
     try:
         c.execute(q)
@@ -120,4 +107,4 @@ def updateOffers(offers,id):
     except Exception as e:
         print(e)
         return F"FATAL ERROR. {e}"
-    return "202 - Status Ok - Offer Created"
+    return "202 - Status Ok - Offer Updated"

@@ -52,8 +52,6 @@ def update():
     if request.method == 'GET':
         try:
             offerId = request.args.get('id')
-            print(f"current user {current_user}")            
-            print(f"logeed {current_user.is_authenticated}")            
             if current_user.is_authenticated:
                 data = get_offers(offerDict = dict(id = offerId, idCreator = current_user.get_id()))
                 return data
@@ -64,6 +62,7 @@ def update():
     else:
         if request.method == 'POST':
             offerId = request.args.get('id')
+            data = request.get_json()
             statMessage = updateOffers(data,int(offerId))
             return statMessage
         else:
