@@ -1,38 +1,40 @@
+import datetime
 from flask import request,redirect,url_for
 from flask_login import login_required, current_user,login_user,logout_user
 from Commons.db import getDB
 
+from .models import User
+
 from .controller import *
 from . import usersBP
-from .models import User,users, get_user
-
-#Esto solo es necesario para las pruebas
-usuario=User(1, "Matias", "pepito@gmail.com", "lala1234")
-users.append(usuario)
+import time
 
 #Login
 @usersBP.route('/login', methods=['GET', 'POST'])
 def login():
     #Autentica si el usuario esta logeado
-    if current_user.is_authenticated:
-        return "ya inicioo sesion"
-    
-    #Si no esta logeado toma los datos del formulario
-    user = request.args.get('user')
-    password = request.args.get('password')
-    remember_me = request.args.get('remember')
-    #Esto simula la busqueda en la base de datos
-    user = get_user(user)
-    #Comprueba si el usuario existe y la contraseña es la misma
-    if user is not None and user.check_password(password):
-        #Loguea al usuario si todo funciono
-        login_user(user, remember=remember_me)
-        return "Se pudo loguear"
-    #Avisa en caso de que no se pudiera loguear correctamente
-    return "La contraseña o usuario estan mal"
 
+    if current_user.is_authenticated:
+        return "Is already logged in."
+    else:
+        #Si no esta logeado toma los datos del formulario
+        username = request.args.get('username')
+        password = request.args.get('password')
+        remember_me = request.args.get('remember')
+        
+        try:
+            #Esto realiza la busqueda en la base de datos
+            user = getUserFromLogin(username, password)
+            #Comprueba si el usuario existe y la contraseña es la misma
+            if ((user!=None) and (isinstance(user,User))):
+                login_user(user, remember = remember_me, duration = datetime.timedelta(hours = 7))
+                return "Se pudo loguear"
+        except Exception as e:
+            #Avisa en caso de que no se pudiera loguear correctamente
+            return f"User or password wrong. Error.{e}"
 
 #Desloguea al usuario
+
 @usersBP.route('/logout')
 @login_required
 def logout():
@@ -51,12 +53,9 @@ def registerUser():
 # ----------------------------- BUSQUEDAS Y FILTROS --------------------------------------
 
 @usersBP.route('/getusers', methods=["GET","POST"])
-# @login_required
+@login_required
 def getUsers():
-    db, c = getDB()
-    c.execute("SELECT * FROM profile ORDER BY id ASC")
-    users = c.fetchall()
-
+    users = getAllUsers()
     if users != None:
         return users
     else:
@@ -70,7 +69,7 @@ def searchUser():
     return i
 
 @usersBP.route('/new', methods = ["POST"])
-# @login_required 
+@login_required 
 def createUser():
     #
     # if is logged in as administrator
@@ -83,7 +82,7 @@ def createUser():
 
 # ----------------------------- VERIFICACIÓN DE USUARIO --------------------------------------
 @usersBP.route('/verification', methods=['GET','POST'])
-# @login_required
+@login_required
 def verifiationOfUser():
     # se hace uso de la tabla 'profileUserDetail' como 'Fact Table'  
     # la cual va a guardar los id de las operaciónes de las questions y answers 
@@ -98,6 +97,6 @@ def verifiationOfUser():
 
 
 @usersBP.route('/')
+@login_required
 def indexUsers():
     return "INDEX USER"
-

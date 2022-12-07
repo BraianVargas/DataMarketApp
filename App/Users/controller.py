@@ -1,9 +1,11 @@
 from Commons.db import getDB
+import hashlib
+from .models import User
 
 def createNewUser(offerDict):
     db,c = getDB()
 
-    q = "INSERT INTO profile "
+    q = "INSERT INTO users "
     keys = []
     values = []    
     for key,value in offerDict.items():
@@ -34,11 +36,37 @@ def createNewUser(offerDict):
         print(e)
         return F"FATAL ERROR. {e}"
 
+def getUserFromLogin(uname, inputPassword):
+    db, c = getDB()
+    try:
+        c.execute(f"SELECT * FROM users WHERE username = %s",(uname,))
+        userSelected = c.fetchone()
+        if userSelected != None:
+            try:
+                if userSelected['password'] == (hashlib.sha512(inputPassword.encode())).hexdigest():
+                    try:
+                        return User(userSelected['id'], userSelected['username'], userSelected['role'], userSelected['password'])
+                    except Exception as e:
+                        return f"User error: {e}"
+                else:
+                    return "Error. User or password not match."    
+            except Exception as e:
+                return f"Error in Password: {e}"
+        else:
+            return "Error. User not found."
+    except Exception as e:
+        return f"Error in username: {e}"
+
+def getAllUsers():
+    db, c = getDB()
+    c.execute("SELECT * FROM users ORDER BY id ASC")
+    users = c.fetchall()
+    return users
 
 def get_users(userDict):
     db, c = getDB()
     filtered=[]
-    query = "SELECT * FROM profile WHERE "
+    query = "SELECT * FROM users WHERE "
     flag = 0 # Bandera de posicion inicial
     try:
         for key,value in userDict.items():
@@ -55,10 +83,3 @@ def get_users(userDict):
             return "404 - User Not Match"
     except Exception as e:
         return f"Fatal Error. {e}"
-
-# ----------------------------- USER VERIFICATION --------------------------------------
-
-def userVerification():
-    db, c = getDB()
-    questions = []
-    query = "SELECT * FROM "

@@ -1,0 +1,21 @@
+PROFILE
+https://thedevarg.pythonanywhere.com/profile/verification
+https://thedevarg.pythonanywhere.com/profile/new
+https://thedevarg.pythonanywhere.com/profile/get/all
+https://thedevarg.pythonanywhere.com/profile/search
+https://thedevarg.pythonanywhere.com/profile/
+
+USERS
+https://thedevarg.pythonanywhere.com/users/login
+https://thedevarg.pythonanywhere.com/users/logout
+https://thedevarg.pythonanywhere.com/users/register
+https://thedevarg.pythonanywhere.com/users/getusers
+https://thedevarg.pythonanywhere.com/users/search
+https://thedevarg.pythonanywhere.com/users/new
+
+
+PROFILE QUESTIONS
+https://thedevarg.pythonanywhere.com/questions/new
+
+PROFILE ANSWERS
+https://thedevarg.pythonanywhere.com/questions/new

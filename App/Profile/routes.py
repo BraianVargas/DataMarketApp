@@ -9,10 +9,13 @@ from .controller import *
 from .Surveys.Answers import controller as answerController
 
 # ----------------------------- BUSQUEDAS Y FILTROS --------------------------------------
+<<<<<<< HEAD
 """
 It gets all the users from the database and returns them.
 :return: A list of tuples.
 """
+=======
+>>>>>>> 31217065ed7beac5c629994b50f44f65f982966e
 @profileBP.route('/get/all', methods=["GET","POST"])
 # @login_required
 def getUsers():
@@ -64,6 +67,10 @@ def createProfile():
 # @login_required
 @cross_origin()
 def verifiationOfUser():
+    # se hace uso de la tabla 'profileUserDetail' como 'Fact Table'  
+    # la cual va a guardar los id de las operaciónes de las questions y answers 
+    # que se encuentran en las tablas 'questionSurvey' y 'answerSurvey'
+    
     db, c = getDB()
     if request.method == 'GET':
         c.execute("SELECT * FROM profilequestion")
@@ -98,3 +105,4 @@ def verifiationOfUser():
 @profileBP.route('/')
 def indexUsers():
     return "INDEX PROFILE"
+
