@@ -35,6 +35,16 @@ def get_offers(offerDict):
         return f"Fatal Error. {e}"   
 
 
+def getOffersByUserId(userId):
+    db, c = getDB()
+    try:
+        c.execute(f'SELECT * FROM offers WHERE idCreator = %s', (userId,))
+        filtered=c.fetchall()
+        return filtered
+    except Exception as e:
+        return f"Fatal Error. {e}"   
+
+
 def create_new_offer(offerDict):
     db,c=getDB()
     # Crea la query por medio de las KEY y las values ingresadas
@@ -82,25 +92,18 @@ def deleteOffers(offerId):
         
 def updateOffers(offers,id):
     db,c=getDB()
-
     keys =[]
     values = []
-
     q = "UPDATE `offers` SET "
-
     for key,value in offers.items():
         keys.append(key)
         values.append(value)
-
     for key,value in offers.items():
         if key == keys[-1]:
             q += f"`{key}`='{value}'"
         else:
             q += f"`{key}`='{value}', "
-        
     q += f" WHERE id={id}"
-
-    #Carga los datos en la db
     try:
         c.execute(q)
         db.commit()

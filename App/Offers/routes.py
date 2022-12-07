@@ -53,7 +53,7 @@ def update():
         try:
             offerId = request.args.get('id')
             if current_user.is_authenticated:
-                data = get_offers(offerDict = dict(id = offerId, idCreator = current_user.get_id()))
+                data = getOffersByUserId(current_user.get_id())
                 return data
             else:
                 return "23"
