@@ -80,7 +80,7 @@ def verifiationOfUser():
                     print(message)
                 except Exception as e:
                     return f"ERROR. {e}"
-               
+
                 i+=1
 
         userVerification(query, query[-1]["userId"])

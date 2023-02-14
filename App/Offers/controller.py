@@ -118,3 +118,7 @@ def updateOffers(offers,id):
         print(e)
         return F"FATAL ERROR. {e}"
     return "202 - Status Ok - Offer Created"
+
+
+
+
