@@ -59,6 +59,20 @@ def get_users(userDict):
 
 
 # ----------------------------- USER VERIFICATION --------------------------------------
+
+    # -- Codigo de modelado de info para el GET de los datos y metadatos de las questions para la verificación de usuario
+def getDataOfGroup(questionGroup):
+    db, c = getDB()
+
+    c.execute(f"SELECT * FROM profilequestion WHERE questionGroup='{str(questionGroup).lower()}'")
+    response = c.fetchall()
+
+
+    return response
+
+
+
+
     """
     It takes a list of answers and a userId, then it checks if the user has answered all the questions,
     if so, it updates the user's profile to verified
