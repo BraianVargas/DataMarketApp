@@ -63,12 +63,54 @@ def get_users(userDict):
     # -- Codigo de modelado de info para el GET de los datos y metadatos de las questions para la verificación de usuario
 def getDataOfGroup(questionGroup):
     db, c = getDB()
+    __metadata__ = [
+        {'age':'number'},
+        {'contact':[
+            {'phone':'number'},{'mail': 'email'}
+            ]
+        }
+    ]
+    # print(True if "phone" in __metadata__[1]['contact'] else False)
 
-    c.execute(f"SELECT * FROM profilequestion WHERE questionGroup='{str(questionGroup).lower()}'")
-    response = c.fetchall()
+    __data__ = []
+    __aux_metadata__ = []
+
+    try:
+        c.execute(f"SELECT * FROM profilequestion WHERE questionGroup='{str(questionGroup).lower()}'")
+        questions = c.fetchall()
+
+        data = questions # ************----------------****************
+
+        for question in questions:
+            if "user entry" in question['questionType'].lower():
+                for meta in __metadata__:
+                    print(meta.keys())
+                    try:
+                        if question['questionGroup'] in meta:
+                            for key in meta.keys():
+                                if key in question['questionName']:
+                                    print(key)
+                                    __aux_metadata__.append(
+                                        [{"Type Entry" : meta.key(key)}]
+                                    )
+                        print(__aux_metadata__)
+                    except:
+                        pass
+
+            elif "multiple choice" in question['questionType'].lower():
+                print("is multiple choice")
+            else:
+                return "404 not find"
+            
 
 
-    return response
+        
+    except Exception as e:
+        return f"Error requesting DDBB. \n{e}"
+
+
+
+    return data
 
 
 

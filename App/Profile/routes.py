@@ -69,7 +69,6 @@ def verifiationOfUser():
 
 @profileBP.route('/verification/<questionGroup>', methods=['GET','POST'])
 def verificationByGroup(questionGroup):
-    print(questionGroup)
     db, c = getDB()
     try:
         if request.method == "GET":
