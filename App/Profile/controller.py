@@ -1,5 +1,5 @@
 from Commons.db import getDB
-import time
+import json
 
 def createNewProfile(offerDict):
     db,c = getDB()
@@ -64,58 +64,74 @@ def get_users(userDict):
 def getDataOfGroup(questionGroup):
     db, c = getDB()
     __metadata__ = [
-        {'age':'number'},
-        {'contact':[
-                {'phone':'number'},
-                {'mail': 'email'}
-            ]
-        },
-        {'address':'string'},
-        {'name':'string'},
-        {'date-of-birth':'date'}
+        {'age': 'number'},
+        {'contact': [
+            {'phone': 'number'},
+            {'mail': 'email'}
+        ]},
+        {'address': 'string'},
+        {'name': 'string'},
+        {'date-of-birth': 'date'}
     ]
-    # print(True if "phone" in __metadata__[1]['contact'] else False)
 
-    __data__ = []
-    __aux_metadata__ = []
+    data = []
 
     try:
         c.execute(f"SELECT * FROM profilequestion WHERE questionGroup='{str(questionGroup).lower()}'")
         questions = c.fetchall()
 
-        data = []
-
         for question in questions:
-            data.append(question)
+            entry_metadata = []
+
             if "user entry" in question['questionType'].lower():
-                for meta in __metadata__:
-                    if question['questionGroup'] in meta.keys():
-                        for key in meta.keys():
-                            __aux_metadata__.append(
-                                [{"Type Entry" : meta[key]}]
-                            )
-                            print(f"key {key}")
-                            # if key in question['questionName']:
-                            print(f"aux_meta: {__aux_metadata__}")
-                    else:
-                        pass
-
+                if questionGroup == "contact":
+                    for meta in __metadata__:
+                        if questionGroup in meta.keys():
+                            contact_metadata = meta[questionGroup]
+                            for contact_entry in contact_metadata:
+                                for key, value in contact_entry.items():
+                                    if key in question['questionDescription'] or question['questionName']:
+                                        entry_metadata = {
+                                            'typeEntry': value
+                                        }
+                                        break
+                                if entry_metadata:
+                                    break
+                            if entry_metadata:
+                                break
+                else:
+                    for meta in __metadata__:
+                        if questionGroup in meta.keys():
+                            entry_metadata = {
+                                'typeEntry': meta[questionGroup]
+                            }
+                            break
+                
+                d = dict(
+                    Datos = question,
+                    Metadatos = entry_metadata
+                )
             elif "multiple choice" in question['questionType'].lower():
-                print("is multiple choice")
+                c.execute(f"SELECT * FROM multiplechoiceoptions WHERE questionGroup='{str(questionGroup).lower()}'")
+                options = c.fetchall()
+                for option in options:
+                    entry_metadata.append(option['optionContent'])
+
+                d = dict(
+                    Datos = question,
+                    Metadatos = dict(
+                        Opciones = entry_metadata
+                    )
+                )
             else:
-                return "404 not found"
-            
+                return ("Unknowed question group")
 
+            data.append(d)
 
-        
     except Exception as e:
         return f"Error requesting DDBB. \n{e}"
 
-
-
     return data
-
-
 
 
     """
