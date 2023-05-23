@@ -60,7 +60,7 @@ def get_users(userDict):
 
 # ----------------------------- USER VERIFICATION --------------------------------------
 
-    # -- Codigo de modelado de info para el GET de los datos y metadatos de las questions para la verificación de usuario
+# -- Codigo de modelado de info para el GET de los datos y metadatos de las questions para la verificación de usuario
 def getDataOfGroup(questionGroup):
     db, c = getDB()
     __metadata__ = [
@@ -81,7 +81,7 @@ def getDataOfGroup(questionGroup):
         questions = c.fetchall()
 
         for question in questions:
-            entry_metadata = []
+            entry_metadata = {}
 
             if "user entry" in question['questionType'].lower():
                 if questionGroup == "contact":
@@ -90,59 +90,51 @@ def getDataOfGroup(questionGroup):
                             contact_metadata = meta[questionGroup]
                             for contact_entry in contact_metadata:
                                 for key, value in contact_entry.items():
-                                    if key in question['questionDescription'] or question['questionName']:
-                                        entry_metadata = {
-                                            'typeEntry': value
-                                        }
+                                    if key in question['questionDescription'] or key in question['questionName']:
+                                        entry_metadata['typeEntry'] = value
                                         break
-                                if entry_metadata:
+                                if 'typeEntry' in entry_metadata:
                                     break
-                            if entry_metadata:
+                            if 'typeEntry' in entry_metadata:
                                 break
                 else:
                     for meta in __metadata__:
                         if questionGroup in meta.keys():
-                            entry_metadata = {
-                                'typeEntry': meta[questionGroup]
-                            }
+                            entry_metadata['typeEntry'] = meta[questionGroup]
                             break
-                
-                d = dict(
-                    Datos = question,
-                    Metadatos = entry_metadata
-                )
+
+                data.append({
+                    'Datos': question,
+                    'Metadatos': entry_metadata
+                })
+
             elif "multiple choice" in question['questionType'].lower():
                 c.execute(f"SELECT * FROM multiplechoiceoptions WHERE questionGroup='{str(questionGroup).lower()}'")
                 options = c.fetchall()
-                for option in options:
-                    entry_metadata.append(option['optionContent'])
+                entry_metadata['Opciones'] = [option['optionContent'] for option in options]
 
-                d = dict(
-                    Datos = question,
-                    Metadatos = dict(
-                        Opciones = entry_metadata
-                    )
-                )
+                data.append({
+                    'Datos': question,
+                    'Metadatos': entry_metadata
+                })
+
             else:
-                return ("Unknowed question group")
-
-            data.append(d)
+                return "Unknowed question group"
 
     except Exception as e:
         return f"Error requesting DDBB. \n{e}"
 
     return data
 
+"""
+It takes a list of answers and a userId, then it checks if the user has answered all the questions,
+if so, it updates the user's profile to verified
 
-    """
-    It takes a list of answers and a userId, then it checks if the user has answered all the questions,
-    if so, it updates the user's profile to verified
-    
-    :param answers: [{'questionId': 1, 'answer': {'id': 1, 'answer': 'Yes'}, 'userId': 1},
-    {'questionId': 2, 'answer': {'id': 2, 'answer': 'No'}, 'userId': 1}, {
-    :param userId: The user's ID
-    :return: A list of questions
-    """
+:param answers: [{'questionId': 1, 'answer': {'id': 1, 'answer': 'Yes'}, 'userId': 1},
+{'questionId': 2, 'answer': {'id': 2, 'answer': 'No'}, 'userId': 1}, {
+:param userId: The user's ID
+:return: A list of questions
+"""
 def userVerification(answers, userId):
     db, c = getDB()
     verified = 0

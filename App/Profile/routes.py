@@ -78,7 +78,22 @@ def verificationByGroup(questionGroup):
             except:
                 return "Error calling an DDBB question."
         else:
-            pass
+            query = request.get_json()
+            if isinstance(query, list):
+                i = 0
+                for i in range(len(query)):
+                    answer = query[i]['answer']
+                    c.execute("SELECT id FROM profileanswer ORDER BY id DESC LIMIT 1")
+                    id = c.fetchone()
+                    answer['id']=id['id'] + 1
+                    try:
+                        message = answerController.createNewAnswer(answer)
+                        print(message)
+                    except Exception as e:
+                        return f"ERROR. {e}"
+                    i+=1
+            userVerification(query, query[-1]["userId"])
+            return "200"
     except Exception as e:
         return f"Error al ejecutar la verificació de usuario. \n {e}"
 
