@@ -39,6 +39,10 @@ def load_user(user_id):
             return user
     return None
 
+@app.errorhandler(404)
+def page_not_found(error):
+    # Esta función se ejecutará cuando se encuentre un error 404
+    return 'Página no encontrada', 404
 
 
 

@@ -66,9 +66,13 @@ def getDataOfGroup(questionGroup):
     __metadata__ = [
         {'age':'number'},
         {'contact':[
-            {'phone':'number'},{'mail': 'email'}
+                {'phone':'number'},
+                {'mail': 'email'}
             ]
-        }
+        },
+        {'address':'string'},
+        {'name':'string'},
+        {'date-of-birth':'date'}
     ]
     # print(True if "phone" in __metadata__[1]['contact'] else False)
 
@@ -79,28 +83,27 @@ def getDataOfGroup(questionGroup):
         c.execute(f"SELECT * FROM profilequestion WHERE questionGroup='{str(questionGroup).lower()}'")
         questions = c.fetchall()
 
-        data = questions # ************----------------****************
+        data = []
 
         for question in questions:
+            data.append(question)
             if "user entry" in question['questionType'].lower():
                 for meta in __metadata__:
-                    print(meta.keys())
-                    try:
-                        if question['questionGroup'] in meta:
-                            for key in meta.keys():
-                                if key in question['questionName']:
-                                    print(key)
-                                    __aux_metadata__.append(
-                                        [{"Type Entry" : meta.key(key)}]
-                                    )
-                        print(__aux_metadata__)
-                    except:
+                    if question['questionGroup'] in meta.keys():
+                        for key in meta.keys():
+                            __aux_metadata__.append(
+                                [{"Type Entry" : meta[key]}]
+                            )
+                            print(f"key {key}")
+                            # if key in question['questionName']:
+                            print(f"aux_meta: {__aux_metadata__}")
+                    else:
                         pass
 
             elif "multiple choice" in question['questionType'].lower():
                 print("is multiple choice")
             else:
-                return "404 not find"
+                return "404 not found"
             
 
 
