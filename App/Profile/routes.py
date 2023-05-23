@@ -79,6 +79,7 @@ def verificationByGroup(questionGroup):
                 return "Error calling an DDBB question."
         else:
             query = request.get_json()
+            print(query)
             if isinstance(query, list):
                 i = 0
                 for i in range(len(query)):
