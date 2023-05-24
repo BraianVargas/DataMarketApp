@@ -42,6 +42,24 @@ app.register_blueprint(answersBP, url_prefix = '/answers')
 from App.Offers import offersBP
 app.register_blueprint(offersBP, url_prefix = '/offers')
 
+@app.route('/indexes')
+def getUsers():
+    return "API OK"
+
+# ----------------------------- GENERA EL ADMINISTRADOR DE LOGIN --------------------------------------
+login_manager = LoginManager(app)
+@login_manager.user_loader
+def load_user(user_id):
+    for user in users:
+        if user.id == int(user_id):
+            return user
+    return None
+
+@app.errorhandler(404)
+def page_not_found(error):
+    # Esta función se ejecutará cuando se encuentre un error 404
+    return 'Página no encontrada', 404
+
 
 
 

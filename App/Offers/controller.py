@@ -110,4 +110,12 @@ def updateOffers(offers,id, idCreator):
     except Exception as e:
         print(e)
         return F"FATAL ERROR. {e}"
+<<<<<<< HEAD
     return "202 - Status Ok - Offer Updated"
+=======
+    return "202 - Status Ok - Offer Created"
+
+
+
+
+>>>>>>> development

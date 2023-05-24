@@ -1,0 +1,32 @@
+{
+   "personal_details":{
+      "name":{
+         "family_name":"User Entry",
+         "given_names":"User Entry"
+      },
+      "gender":"Multiple choice",
+      "date_of_birth":{
+         "day":"User Entry",
+         "month":"User Entry",
+         "year":"User Entry"
+      },
+      "nationality":"User Entry"
+   },
+   "personal_identity_validation":{
+      "id":"User Entry"
+   },
+   "address":{
+      "country":"User Entry",
+      "state_province":"User Entry",
+      "postcode":"User Entry",
+      "street":{
+         "name":"User Entry",
+         "number":"User Entry",
+         "apartment_flat_unit_number":"User Entry"
+      }
+   },
+   "contact_details":{
+      "mobile_phone_number":"User Entry",
+      "email":"User Entry"
+   }
+}
