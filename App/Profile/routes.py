@@ -74,6 +74,7 @@ def verificationByGroup(questionGroup):
         if request.method == "GET":
             try:
                 data = getDataOfGroup(questionGroup)
+                # return dict(data)
                 return data
             except:
                 return "Error calling an DDBB question."
@@ -98,7 +99,7 @@ def verificationByGroup(questionGroup):
     except Exception as e:
         return f"Error al ejecutar la verificació de usuario. \n {e}"
 
-        
+
 
 
 
