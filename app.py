@@ -26,6 +26,10 @@ app.register_blueprint(answersBP, url_prefix = '/answers')
 from App.Offers import offersBP
 app.register_blueprint(offersBP, url_prefix = '/offers')
 
+from App.WaitingList import waitlistBP
+app.register_blueprint(waitlistBP, url_prefix = '/waitlist')
+
+
 @app.route('/indexes')
 def getUsers():
     return "API OK"

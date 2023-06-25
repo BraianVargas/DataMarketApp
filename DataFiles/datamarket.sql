@@ -68,7 +68,6 @@ CREATE TABLE `offers` (
 -- Estructura de tabla para la tabla `paymentinformation`
 --
 
-
 CREATE TABLE `paymentinformation` (
   `id` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
@@ -185,27 +184,27 @@ CREATE TABLE `profilequestion` (
 -- Volcado de datos para la tabla `profilequestion`
 --
 
-INSERT INTO `profilequestion`(`questionName`, `questionGroup`, `questionDescription`, `questionType`, `additionalComents`, `sysActive`)
-VALUES
-(`Personal Details -Name`, `Last Name`, `This will not be shared or displayed publicaly, we onle use this to show you suitable offers`, `User Entry`, `comments`, 1),
-(`Personal Details -Name`, `Names`, `This will not be shared or displayed publicaly, we onle use this to show you suitable offers`, `User Entry`, `comments`, 1),
-(`Personal Details`, `Male`, `This will not be shared or displayed publicaly, we onle use this to show you suitable offers`, `Multiple choice`, `comments`, 1),
-(`Personal Details`, `Female`, `This will not be shared or displayed publicaly, we onle use this to show you suitable offers`, `Multiple choice`, `comments`, 1),
-(`Personal Details`, `Non-Binary`, `This will not be shared or displayed publicaly, we onle use this to show you suitable offers`, `Multiple choice`, `comments`, 1),
-(`Personal Details`, `Day`, `This will not be shared or displayed publicaly, we onle use this to show you suitable offers`, `User Entry`, `comments`, 1),
-(`Personal Details`, `Month`, `This will not be shared or displayed publicaly, we onle use this to show you suitable offers`, `User Entry`, `comments`, 1),
-(`Personal Details`, `Year`, `This will not be shared or displayed publicaly, we onle use this to show you suitable offers`, `User Entry`, `comments`, 1),
-(`Personal Details`, `Nationality`, `This will not be shared or displayed publicaly, we onle use this to show you suitable offers`, `User Entry`, `comments`, 1),
-(`Personal identity validation`, `ID number`, `This will not be shared or displayed publicaly, we onle use this to show you suitable offers`, `User Entry`, `comments`, 1),
-(`Where do you live?`, `Country`, `What is your address?`, `This will not be shared or displayed publicaly, we onle use this to show you suitable offers`, `User Entry`, `comments`, 1),
-(`Where do you live?`, `State/Province`, `What is your address?`, `This will not be shared or displayed publicaly, we onle use this to show you suitable offers`, `User Entry`, `comments`, 1),
-(`Where do you live?`, `Postcode`, `What is your address?`, `This will not be shared or displayed publicaly, we onle use this to show you suitable offers`, `User Entry`, `comments`, 1),
-(`Where do you live?`, `Street`, `What is your address?`, `This will not be shared or displayed publicaly, we onle use this to show you suitable offers`, `User Entry`, `comments`, 1),
-(`Where do you live?`, `Street name`, `What is your address?`, `This will not be shared or displayed publicaly, we onle use this to show you suitable offers`, `User Entry`, `comments`, 1),
-(`Where do you live?`, `Street number`, `What is your address?`, `This will not be shared or displayed publicaly, we onle use this to show you suitable offers`, `User Entry`, `comments`, 1),
-(`Where do you live?`, `Apartment/Flat/Unit number (if any)`, `What is your address?`, `This will not be shared or displayed publicaly, we onle use this to show you suitable offers`, `User Entry`, `comments`, 1),
-(`Contact details`, `Mobile/cell`, `What is your mobile phone number`, `This will not be shared or displayed publicaly, we onle use this to show you suitable offers`, `User Entry`, `comments`, 1),
-(`Contact details`, `email`, `Email`, `This will not be shared or displayed publicaly, we onle use this to show you suitable offers`, `User Entry`, `comments`, 1);
+INSERT INTO `profilequestion` (`id`, `questionName`, `questionGroup`, `questionGroupDisplay`, `questionDescription`, `questionType`, `answerOptionId`, `additionalComents`, `sysActive`) VALUES
+(1, 'Name', 'name', '1. What is your name?', 'please enter your name and details exactly as they appear on your ID or Doc used to vefiry your identity', 'user entry', 1, 'This won\'t be displayed publicly we only use this to match you with the perfect offers for you', 1),
+(2, 'Last Name', 'name', '1. What is your name?', 'please enter your name and details exactly as they appear on your ID or Doc used to vefiry your identity', 'user entry', 1, 'This won\'t be displayed publicly we only use this to match you with the perfect offers for you', 1),
+(3, 'gender', 'gender', '3. What\'s your gender?', 'define your gender will help us to find relevants offers for you', 'Multiple choice', 4, 'This won\'t be displayed publicly we only use this to match you with the perfect offers for you', 1),
+(4, 'date of birth', 'age/date of birth', '4. What\'s your date of birth?', 'please enter your name and details exactly as they appear on your ID or Doc used to vefiry your identity', 'user entry', 3, 'This won\'t be displayed publicly we only use this to match you with the perfect offers for you', 1),
+(5, 'date of birth', 'age/date of birth', '4. What\'s your date of birth?', 'Day', 'user entry', 2, 'This won\'t be displayed publicly we only use this to match you with the perfect offers for you', 1),
+(6, 'date of birth', 'age/date of birth', '4. What\'s your date of birth?', 'Month', 'user entry', 2, 'This won\'t be displayed publicly we only use this to match you with the perfect offers for you', 1),
+(7, 'date of birth', 'age/date of birth', '4. What\'s your date of birth?', 'Year', 'user entry', 2, 'This won\'t be displayed publicly we only use this to match you with the perfect offers for you', 1),
+(9, 'Country', 'address', '5. What is your address?', 'enter your country', 'user entry', 1, 'This won\'t be displayed publicly we only use this to match you with the perfect offers for you', 1),
+(10, 'State/Province', 'address', '5. What is your address?', 'enter your state or province of residence', 'user entry', 1, 'This won\'t be displayed publicly we only use this to match you with the perfect offers for you', 1),
+(11, 'Postcode', 'address', '5. What is your address?', 'enter your postcode', 'user entry', 1, 'This won\'t be displayed publicly we only use this to match you with the perfect offers for you', 1),
+(12, 'Street name', 'address', '5. What is your address?', 'enter your street name or rd name', 'user entry', 1, 'This won\'t be displayed publicly we only use this to match you with the perfect offers for you', 1),
+(13, 'Street number', 'address', '5. What is your address?', 'enter your street number', 'user entry', 2, 'This won\'t be displayed publicly we only use this to match you with the perfect offers for you', 1),
+(14, 'Apartment/Flat/Unit number (if any)', 'address', '5. What is your address?', 'enter your flat or apartment number', 'user entry', 1, 'This won\'t be displayed publicly we only use this to match you with the perfect offers for you', 1),
+(15, 'Additional residence information', 'address', '5. What is your address?', 'any additional information if needed', 'user entry', 1, 'This won\'t be displayed publicly we only use this to match you with the perfect offers for you', 1),
+(16, 'Occupation status', 'Occupation', '6.What best describes your current occupation status?', 'You may select two options  or more options if relevant', 'user entry', 1, 'This won\'t be displayed publicly we only use this to match you with the perfect offers for you', 1),
+(17, 'phone and contact verification', 'contact', '7. What\'s your mobile phone number?', 'please enter your phone number without country code', 'user entry', 2, 'This won\'t be displayed publicly we only use this to match you with the perfect offers for you', 1),
+(18, 'phone verification', 'contact', 'Enter the verification code sent to your phone', 'enter the code to complete the sign in proccess', 'user entry', 2, 'This is part of the user validation', 1),
+(19, 'term and conditions', 'term and conditions', 'Please read the term and conditions before continue', 'Please read the term and conditions before continue', 'Multiple choice', 0, '', 0),
+(20, 'sport_main', 'sports', '2. Do you exercise regularly?', 'please enter yes or no', 'Multiple choice', 4, 'This won\'t be displayed publicly we only use this to match you with the perfect offers for you', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -256,7 +255,7 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `username` text NOT NULL,
   `password` text NOT NULL,
-  `role` text NOT NULL DEFAULT `user`,
+  `role` text NOT NULL DEFAULT 'user',
   `token` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -265,7 +264,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `role`, `token`) VALUES
-(1, `Matias`, `lala1234`, `user`, ``);
+(1, 'Matias', 'lala1234', 'user', '');
 
 --
 -- Índices para tablas volcadas
