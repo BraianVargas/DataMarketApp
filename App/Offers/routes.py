@@ -2,16 +2,37 @@ from Commons.db import getDB
 from flask import request
 from . import offersBP
 from .controller import *
+import json
+from flask import Flask, jsonify
+
+
 # ---------------------- GET routes ----------------------
 @offersBP.route("/getOffers", methods=['GET'])
 def getAll():
-    db, c = getDB()
-    c.execute("SELECT * FROM offers ORDER BY id ASC ")
-    offers = c.fetchall()
-    if offers!=None:
-        return offers
-    else:
-        return "404 - Offer Not Found"
+    try:
+        db, c = getDB()
+        c.execute("SELECT * FROM offers ORDER BY id ASC ")
+        rows = c.fetchall()
+
+        # Convert bytes objects to strings in each row of the result
+        offers = []
+        for row in rows:
+            offer = dict(row)  # Convert the tuple to a dictionary
+            for key, value in offer.items():
+                if isinstance(value, bytes):
+                    offer[key] = value.decode('utf-8')  # Convert bytes to string
+            offers.append(offer)
+
+        if offers:
+            # Return a JSON response with the "application/json" Content-Type header
+            return jsonify(offers)
+        else:
+            # Use the appropriate HTTP status code (404 Not Found)
+            return jsonify(message="Offer Not Found"), 404
+    except Exception as e:
+        # Handle any database connection or query errors gracefully
+        return jsonify(message="Error occurred: {}".format(str(e))), 500
+
     
 @offersBP.route('/filter/offerId/<offerId>')
 def getOfferById(offerId):
