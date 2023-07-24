@@ -29,6 +29,9 @@ app.register_blueprint(offersBP, url_prefix = '/offers')
 from App.WaitingList import waitlistBP
 app.register_blueprint(waitlistBP, url_prefix = '/waitlist')
 
+from App.Apra import apraBP
+app.register_blueprint(apraBP, url_prefix = '/apra')
+
 
 @app.route('/indexes')
 def getUsers():
