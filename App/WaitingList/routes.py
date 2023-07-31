@@ -12,3 +12,12 @@ def join():
         return info
     else:
         return "join to the waiting list"
+    
+@waitlistBP.route("/enroled", methods=['GET'])
+def get_waiters():
+    if request.method == 'GET':
+        data = getWaiters()
+        return data
+    else:
+        return jsonify({'error': 'post method not allowed'}), 400
+        

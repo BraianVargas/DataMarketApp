@@ -41,3 +41,14 @@ def joinController(offerDict):
     db.commit()
 
     return 'Successfully added to the waiting list.'
+
+
+
+def getWaiters():
+    db, c = getDB()
+    
+    query = "SELECT * FROM waitlist"
+    c.execute(query)
+    waiters = c.fetchall()
+    
+    return waiters
