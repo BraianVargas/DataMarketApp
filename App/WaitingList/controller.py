@@ -51,4 +51,4 @@ def getWaiters():
     c.execute(query)
     waiters = c.fetchall()
     
-    return waiters
+    return jsonify(waiters)
