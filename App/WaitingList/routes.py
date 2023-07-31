@@ -6,9 +6,9 @@ from . import waitlistBP
 
 @waitlistBP.route('/join', methods=['GET', 'POST'])
 def join():
-    if request.method == 'GET':
-        return "page not found"
-    else:
+    if request.method == 'POST':
         data = request.get_json()
         info = joinController(data)
         return info
+    else:
+        return "join to the waiting list"
