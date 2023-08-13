@@ -31,6 +31,7 @@ def process_data(his_mont):
 
     cursor.execute(sql_col_names)
     columns = [col[0] for col in cursor.fetchall()]
+    columns = list(dict.fromkeys(columns))
 
     def addElement(abn):
         elements = []
