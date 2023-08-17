@@ -13,7 +13,14 @@ def getHistorical():
 def getMonthly():
     return process_data("mensuales")
 
+# LOCALHOST
 @apraBP.route('/etl')
 def loadEtl():
     engine = create_engine('mysql+mysqlconnector://root@localhost/datamarket', connect_args={'connect_timeout': 120})
     return loadDatabase(engine)
+
+# PRODUCTION
+# @apraBP.route('/etl')
+# def loadEtl():
+#     engine = create_engine('mysql+mysqlconnector://Flowkai:41830596.-1a@Flowkai.mysql.pythonanywhere-services.com/Flowkai$datamarket', connect_args={'connect_timeout': 120})
+#     return loadDatabase(engine)
